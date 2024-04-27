@@ -1,24 +1,21 @@
 <template>
-  <v-btn @click="toggleTheme">Toggle Theme</v-btn>
+  <v-switch
+            inset
+            color="info"
+            v-model="darkMode"
+            @change="toggleTheme()"
+            :label="`It's ${darkMode ? 'Dark' : 'Light'}!`"
+          ></v-switch>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted } from 'vue';
+<script setup>
+import { ref } from "vue";
+import { useTheme } from "vuetify";
 
-const theme = ref('light');
-
-onMounted(() => {
-  theme.value = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  updateTheme();
-});
-
-const updateTheme = () => {
-  const themeCss = document.getElementById('theme-css');
-  themeCss.href = `src/assets/css/theme.${theme.value}.css`;
-};
+const theme = useTheme();
+const darkMode = ref(false);
 
 const toggleTheme = () => {
-  theme.value = theme.value === 'light' ? 'dark' : 'light';
-  updateTheme();
+  theme.global.name.value = darkMode.value ? "dark" : "light";
 };
 </script>

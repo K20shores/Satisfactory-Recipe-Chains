@@ -18,18 +18,6 @@ import ThemeToggle from './components/ThemeToggle.vue';
         </v-col>
         <v-col cols="auto"> <v-btn color="error"> Error </v-btn> </v-col>
       </v-row>
-
-      <v-row class="d-flex align-center justify-center">
-        <v-col cols="auto">
-          <v-btn color="info"> Info </v-btn>
-        </v-col>
-        <v-col cols="auto">
-          <v-btn color="success"> Success </v-btn>
-        </v-col>
-        <v-col cols="auto">
-          <v-btn color="warning"> Warning </v-btn>
-        </v-col>
-      </v-row>
     </v-responsive>
   </v-container>
   <ThemeToggle/>

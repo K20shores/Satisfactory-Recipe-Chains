@@ -2,6 +2,7 @@ import 'vuetify/styles'
 import { createVuetify, type ThemeDefinition } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+// themes made from the builder: https://material-foundation.github.io/material-theme-builder/
 import materialTheme from '../assets/material-theme.json'
 
 const themes: Record<string, ThemeDefinition> = {}
@@ -21,5 +22,4 @@ export default createVuetify({
     defaultTheme: 'light',
     themes
   },
-
 })

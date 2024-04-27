@@ -1,11 +1,10 @@
 <template>
-  <v-switch
-            inset
-            color="info"
-            v-model="darkMode"
-            @change="toggleTheme()"
-            :label="`It's ${darkMode ? 'Dark' : 'Light'}!`"
-          ></v-switch>
+  <v-select
+    :items="themeNames"
+    v-model="selectedTheme"
+    @update:modelValue="toggleTheme"
+    label="Select a theme"
+  ></v-select>
 </template>
 
 <script setup>
@@ -14,8 +13,11 @@ import { useTheme } from "vuetify";
 
 const theme = useTheme();
 const darkMode = ref(false);
+const selectedTheme = ref(theme.global.name.value);
+const themeNames = ref(Object.keys(theme.themes.value).sort());
 
 const toggleTheme = () => {
-  theme.global.name.value = darkMode.value ? "dark" : "light";
+  console.log(selectedTheme.value);
+  theme.global.name.value = selectedTheme.value;
 };
 </script>

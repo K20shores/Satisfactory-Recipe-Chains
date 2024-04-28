@@ -1,29 +1,27 @@
-<script setup lang="ts">
-import Menu from './components/Menu.vue';
-import ThemeToggle from './components/ThemeToggle.vue';
-</script>
-
 <template>
-  <Menu />
-  <v-container class="fill-height">
-    <v-responsive class="d-flex align-center text-center fill-height">
-      <div class="text-body-2 font-weight-light mb-n1">Welcome to</div>
+  <Layout>
+    <v-container class="fill-height">
+      <v-responsive class="d-flex align-center text-center fill-height">
+        <div class="text-body-2 font-weight-light mb-n1">Welcome to</div>
 
-      <h1 class="text-h2 font-weight-bold">Vuetify</h1>
+        <h1 class="text-h2 font-weight-bold">Vuetify</h1>
 
-      <div class="py-5" />
+        <div class="py-5" />
 
-      <v-row class="d-flex align-center justify-center">
-        <v-col cols="auto"> <v-btn color="primary"> Primary </v-btn> </v-col>
-        <v-col cols="auto">
-          <v-btn color="secondary"> Secondary </v-btn>
-        </v-col>
-        <v-col cols="auto"> <v-btn color="error"> Error </v-btn> </v-col>
-      </v-row>
-    </v-responsive>
-  </v-container>
-  <ThemeToggle/>
+        <v-row class="d-flex align-center justify-center">
+          <v-col cols="auto"> <v-btn color="primary"> Primary </v-btn> </v-col>
+          <v-col cols="auto">
+            <v-btn color="secondary"> Secondary </v-btn>
+          </v-col>
+          <v-col cols="auto"> <v-btn color="error"> Error </v-btn> </v-col>
+        </v-row>
+      </v-responsive>
+    </v-container>
+  </Layout>
 </template>
 
-<style scoped>
-</style>
+<script setup lang="ts">
+import Layout from './components/Layout.vue';
+</script>
+
+<style scoped></style>

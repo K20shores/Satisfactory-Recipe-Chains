@@ -4,6 +4,9 @@
     v-model="selectedTheme"
     @update:modelValue="toggleTheme"
     label="Select a theme"
+    class="theme-select"
+    variant="underlined"
+    hide-details
   ></v-select>
 </template>
 
@@ -20,3 +23,10 @@ const toggleTheme = () => {
   theme.global.name.value = selectedTheme.value;
 };
 </script>
+
+<style scoped>
+.theme-select {
+  min-width: 150px;
+  max-width: 200px;
+}
+</style>

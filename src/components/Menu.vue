@@ -1,52 +1,63 @@
 <template>
-  <v-app>
-    <v-app-bar :elevation="2">
-      <v-app-bar-nav-icon @click="open = !open" v-if="mobile"></v-app-bar-nav-icon>
+  <v-app-bar color="primary" :elevation="2">
+    <v-app-bar-nav-icon @click="open = !open" v-if="mobile"></v-app-bar-nav-icon>
 
-      <v-app-bar-title>Application Bar</v-app-bar-title>
+    <v-app-bar-title class="text-start">Recipe Chains</v-app-bar-title>
 
-      <v-spacer></v-spacer>
-      <v-toolbar-items v-if="!mobile">
-        <v-btn v-for="item in items" :key="item.title">
-          <v-icon>{{ item.icon }}</v-icon>
-          {{ item.title }}
-        </v-btn>
-      </v-toolbar-items>
-    </v-app-bar>
+    <v-spacer></v-spacer>
+    <ThemeToggle/>
+    <v-toolbar-items v-if="!mobile">
+      <v-btn v-for="item in items" :key="item.title" @click="navigate(item.route)">
+        <v-icon>{{ item.icon }}</v-icon>
+        {{ item.title }}
+      </v-btn>
+    </v-toolbar-items>
+  </v-app-bar>
 
-    <!-- Move the v-navigation-drawer component here -->
-    <v-navigation-drawer v-model="open" app>
-      <v-list>
-        <v-list-item v-for="item in items" :key="item.title">
-          <v-icon>{{ item.icon }}</v-icon>
-          {{ item.title }}
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-  </v-app>
+  <v-navigation-drawer v-if="mobile" v-model="open" app>
+    <v-list>
+      <v-list-item v-for="item in items" :key="item.title" @click="navigate(item.route)">
+        <v-icon>{{ item.icon }}</v-icon>
+        {{ item.title }}
+      </v-list-item>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
 <script>
 import { ref, onMounted } from 'vue';
 import { useDisplay } from 'vuetify';
+import { useRoute, useRouter } from 'vue-router'
+import ThemeToggle from './ThemeToggle.vue';
 
 export default {
+  components: {
+    ThemeToggle,
+  },
   setup() {
     const { mobile } = useDisplay();
     const open = ref(false);
+    const router = useRouter()
+    const route = useRoute()
     const items = ref([
-      { title: 'Home', icon: 'mdi-home' },
-      { title: 'About', icon: 'mdi-information' },
-      // Add more items here
+      { title: 'Home', icon: 'mdi-home', route: '/' },
+      { title: 'About', icon: 'mdi-information', route: '/about' },
     ]);
 
+    const navigate = (route) => {
+      router.push(route);
+      open.value = false;
+    };
+
     onMounted(() => {
+      console.log(route.value);
     });
 
     return {
       items,
       open,
       mobile,
+      navigate,
     };
   },
 };

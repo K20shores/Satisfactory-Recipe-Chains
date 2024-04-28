@@ -1,0 +1,25 @@
+<template>
+    <v-footer color="secondary" class="white--text">
+      <v-container fluid text-xs-center>
+        <v-row align="center">
+          <v-col cols="12">
+            <p>© {{ currentYear }} Your Company Name</p>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-footer>
+  </template>
+  
+  <script>
+  export default {
+    name: 'Footer',
+    data() {
+      return {
+        currentYear: new Date().getFullYear(),
+      };
+    },
+  }
+  </script>
+  
+  <style scoped>
+  </style>

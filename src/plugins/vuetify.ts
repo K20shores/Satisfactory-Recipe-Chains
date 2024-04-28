@@ -12,7 +12,7 @@ for (const scheme in materialTheme.schemes) {
   const isDark = scheme.includes('dark');
   themes[scheme] = {
     dark: isDark,
-    colors: materialTheme.schemes[scheme]
+    colors: materialTheme.schemes[scheme as keyof typeof materialTheme.schemes]
   }
 }
 

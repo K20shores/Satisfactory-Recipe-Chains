@@ -3,7 +3,7 @@
       <v-container fluid text-xs-center>
         <v-row align="center">
           <v-col cols="12">
-            <p>© {{ currentYear }} Your Company Name</p>
+            <p>© {{ currentYear }} James Hollas</p>
           </v-col>
         </v-row>
       </v-container>

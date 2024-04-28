@@ -1,14 +1,17 @@
 <template>
   <v-app>
     <Menu />
-    <v-container class="fill-height">
-      <router-view></router-view>
-    </v-container>
-    <Footer />
+    <v-main>
+      <router-view />
+    </v-main>
   </v-app>
 </template>
 
-<script setup lang="ts">
+<script>
 import Menu from './Menu.vue';
-import Footer from './Footer.vue';
+export default {
+  components: {
+    Menu,
+  },
+};
 </script>

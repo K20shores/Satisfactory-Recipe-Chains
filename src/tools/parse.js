@@ -37,6 +37,22 @@ const parse_recipes = (jsonData) => {
   }));
 }
 
+const parse_resource = (jsonData) => {
+  const recipe_native_class = "/Script/CoreUObject.Class'/Script/FactoryGame.FGResourceDescriptor'";
+  const targetObject = jsonData.find(item => item.NativeClass === recipe_native_class);
+
+  if (!targetObject) {
+    throw new Error('Resource class not found');
+  }
+
+  return targetObject.Classes.map(item => ({
+    name: item.mDisplayName,
+    description: item.mDescription,
+    energyValue: item.mEnergyValue,
+    radioactiveDecay: item.mRadioactiveDecay
+  }));
+}
+
 const argv = yargs(hideBin(process.argv))
   .option('file', {
     alias: 'f',
@@ -60,8 +76,9 @@ const data = fs.readFileSync(filePath);
 const jsonData = JSON.parse(data);
 
 const result = {
-  items: parse_items(jsonData).slice(0,5),
-  recipes: parse_recipes(jsonData).slice(0,5),
+  items: parse_items(jsonData),
+  recipes: parse_recipes(jsonData),
+  resources: parse_resource(jsonData),
 };
 
 fs.writeFileSync(outputPath, JSON.stringify(result, null, 2));

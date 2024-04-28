@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar color="primary" :elevation="2">
+  <v-app-bar app color="primary" :absolute="false">
     <v-app-bar-nav-icon @click="open = !open" v-if="mobile"></v-app-bar-nav-icon>
 
     <v-app-bar-title class="text-start">Recipe Chains</v-app-bar-title>
@@ -14,7 +14,7 @@
     </v-toolbar-items>
   </v-app-bar>
 
-  <v-navigation-drawer v-if="mobile" v-model="open" app>
+  <v-navigation-drawer v-if="mobile" v-model="open" >
     <v-list>
       <v-list-item v-for="item in items" :key="item.title" @click="navigate(item.route)">
         <v-icon>{{ item.icon }}</v-icon>
@@ -50,7 +50,6 @@ export default {
     };
 
     onMounted(() => {
-      console.log(route.value);
     });
 
     return {

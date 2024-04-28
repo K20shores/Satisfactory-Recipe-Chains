@@ -2,6 +2,21 @@ import fs from 'fs';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
+function parse_ingredients(ingredients) {
+  const regex = /ItemClass=.*?'\"\/Game\/FactoryGame\/(.*?)\"',Amount=(\d+)/g;
+  let match;
+  const result = [];
+
+  while ((match = regex.exec(ingredients)) !== null) {
+    result.push({
+      name: match[1].replace(/\//g, '.'),
+      amount: parseInt(match[2], 10),
+    });
+  }
+
+  return result;
+}
+
 const parse_items = (jsonData) => {
   const item_native_class = "/Script/CoreUObject.Class'/Script/FactoryGame.FGItemDescriptor'";
   const targetObject = jsonData.find(item => item.NativeClass === item_native_class);
@@ -12,6 +27,7 @@ const parse_items = (jsonData) => {
 
   return targetObject.Classes.map(item => ({
       name: item.mDisplayName,
+      className: item.ClassName,
       description: item.mDescription,
       energyValue: item.mEnergyValue,
       radioactiveDecay: item.mRadioactiveDecay
@@ -29,8 +45,8 @@ const parse_recipes = (jsonData) => {
 
   return targetObject.Classes.map(item => ({
     name: item.mDisplayName,
-    ingredients: item.mIngredients,
-    product: item.mProduct,
+    ingredients: parse_ingredients(item.mIngredients),
+    product: parse_ingredients(item.mProduct),
     duration: item.mManufactoringDuration,
     powerConsumptionConstant: item.mVariablePowerConsumptionConstant,
     powerConsumptionFactor: item.mVariablePowerConsumptionFactor,
@@ -81,4 +97,4 @@ const result = {
   resources: parse_resource(jsonData),
 };
 
-fs.writeFileSync(outputPath, JSON.stringify(result, null, 2));
+fs.writeFileSync(outputPath, JSON.stringify(result));

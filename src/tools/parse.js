@@ -44,10 +44,16 @@ const argv = yargs(hideBin(process.argv))
     description: 'Path to the file',
     demandOption: true,
   })
+  .option('output', {
+    alias: 'o',
+    type: 'string',
+    description: 'Path to the output file',
+    demandOption: true,
+  })
   .argv;
 
 const filePath = argv.file;
-console.log(`Reading file from ${filePath}`);
+const outputPath = argv.output;
 
 const data = fs.readFileSync(filePath);
 
@@ -58,4 +64,4 @@ const result = {
   recipes: parse_recipes(jsonData).slice(0,5),
 };
 
-console.log(result);
+fs.writeFileSync(outputPath, JSON.stringify(result, null, 2));

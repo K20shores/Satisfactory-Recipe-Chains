@@ -1,0 +1,76 @@
+{
+  "items": [
+    {
+      "name": "Uranium Waste",
+      "description": "The by-product of consuming Uranium Fuel Rods in the Nuclear Power Plant.\r\nNon-fissile Uranium can be extracted. Handle with caution.\r\n\r\nCaution: HIGHLY Radioactive.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "10.000000"
+    },
+    {
+      "name": "Plutonium Waste",
+      "description": "The by-product of consuming Plutonium Fuel Rods in the Nuclear Power Plant.\r\nNeeds to be stored in a safe location. Handle with caution.\r\n\r\nCaution: EXTREMELY Radioactive.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "200.000000"
+    },
+    {
+      "name": "Battery",
+      "description": "Primarily used as fuel for Drones and Vehicles.",
+      "energyValue": "6000.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Aluminum Ingot",
+      "description": "Aluminum Ingots are made from Aluminum Scrap, which is refined from Alumina Solution.\r\nUsed to produce specialized aluminum-based parts.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Color Cartridge",
+      "description": "Used for applying Patterns to structures with the Customizer.\r\n\r\n(Patterns can be purchased in the AWESOME Shop.)",
+      "energyValue": "900.000000",
+      "radioactiveDecay": "0.000000"
+    }
+  ],
+  "recipes": [
+    {
+      "name": "Blueprint Designer",
+      "ingredients": "((ItemClass=/Script/Engine.BlueprintGeneratedClass'\"/Game/FactoryGame/Resource/Parts/ModularFrame/Desc_ModularFrame.Desc_ModularFrame_C\"',Amount=15),(ItemClass=/Script/Engine.BlueprintGeneratedClass'\"/Game/FactoryGame/Resource/Parts/Cable/Desc_Cable.Desc_Cable_C\"',Amount=25),(ItemClass=/Script/Engine.BlueprintGeneratedClass'\"/Game/FactoryGame/Resource/Parts/Cement/Desc_Cement.Desc_Cement_C\"',Amount=100),(ItemClass=/Script/Engine.BlueprintGeneratedClass'\"/Game/FactoryGame/Resource/Parts/SteelPlate/Desc_SteelPlate.Desc_SteelPlate_C\"',Amount=100))",
+      "product": "((ItemClass=/Script/Engine.BlueprintGeneratedClass'\"/Game/FactoryGame/Buildable/Factory/BlueprintDesigner/Desc_BlueprintDesigner.Desc_BlueprintDesigner_C\"',Amount=1))",
+      "duration": "1.000000",
+      "powerConsumptionConstant": "0.000000",
+      "powerConsumptionFactor": "1.000000"
+    },
+    {
+      "name": "Basic Wall 1m",
+      "ingredients": "((ItemClass=/Script/Engine.BlueprintGeneratedClass'\"/Game/FactoryGame/Resource/Parts/Cement/Desc_Cement.Desc_Cement_C\"',Amount=2))",
+      "product": "((ItemClass=/Script/Engine.BlueprintGeneratedClass'\"/Game/FactoryGame/Buildable/Building/Wall/ConcreteWallSet/Desc_Wall_Concrete_8x1.Desc_Wall_Concrete_8x1_C\"',Amount=1))",
+      "duration": "1.000000",
+      "powerConsumptionConstant": "0.000000",
+      "powerConsumptionFactor": "1.000000"
+    },
+    {
+      "name": "Basic Wall 4m",
+      "ingredients": "((ItemClass=/Script/Engine.BlueprintGeneratedClass'\"/Game/FactoryGame/Resource/Parts/Cement/Desc_Cement.Desc_Cement_C\"',Amount=2))",
+      "product": "((ItemClass=/Script/Engine.BlueprintGeneratedClass'\"/Game/FactoryGame/Buildable/Building/Wall/ConcreteWallSet/Desc_Wall_Concrete_8x4.Desc_Wall_Concrete_8x4_C\"',Amount=1))",
+      "duration": "1.000000",
+      "powerConsumptionConstant": "0.000000",
+      "powerConsumptionFactor": "1.000000"
+    },
+    {
+      "name": "Conveyor Wall x1",
+      "ingredients": "((ItemClass=/Script/Engine.BlueprintGeneratedClass'\"/Game/FactoryGame/Resource/Parts/Cement/Desc_Cement.Desc_Cement_C\"',Amount=2))",
+      "product": "((ItemClass=/Script/Engine.BlueprintGeneratedClass'\"/Game/FactoryGame/Buildable/Building/Wall/ConcreteWallSet/Desc_Wall_Concrete_8x4_ConveyorHole_01.Desc_Wall_Concrete_8x4_ConveyorHole_01_C\"',Amount=1))",
+      "duration": "1.000000",
+      "powerConsumptionConstant": "0.000000",
+      "powerConsumptionFactor": "1.000000"
+    },
+    {
+      "name": "Conveyor Wall x2",
+      "ingredients": "((ItemClass=/Script/Engine.BlueprintGeneratedClass'\"/Game/FactoryGame/Resource/Parts/Cement/Desc_Cement.Desc_Cement_C\"',Amount=2))",
+      "product": "((ItemClass=/Script/Engine.BlueprintGeneratedClass'\"/Game/FactoryGame/Buildable/Building/Wall/ConcreteWallSet/Desc_Wall_Concrete_8x4_ConveyorHole_02.Desc_Wall_Concrete_8x4_ConveyorHole_02_C\"',Amount=1))",
+      "duration": "1.000000",
+      "powerConsumptionConstant": "0.000000",
+      "powerConsumptionFactor": "1.000000"
+    }
+  ]
+}

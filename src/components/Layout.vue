@@ -2,7 +2,7 @@
   <v-app>
     <Menu />
     <v-container class="fill-height">
-      <slot />
+      <router-view></router-view>
     </v-container>
     <Footer />
   </v-app>

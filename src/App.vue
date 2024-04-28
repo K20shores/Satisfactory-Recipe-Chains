@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import Menu from './components/Menu.vue';
 import ThemeToggle from './components/ThemeToggle.vue';
 </script>
 
 <template>
+  <Menu />
   <v-container class="fill-height">
     <v-responsive class="d-flex align-center text-center fill-height">
       <div class="text-body-2 font-weight-light mb-n1">Welcome to</div>

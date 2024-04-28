@@ -17,7 +17,6 @@ const selectedTheme = ref(theme.global.name.value);
 const themeNames = ref(Object.keys(theme.themes.value).sort());
 
 const toggleTheme = () => {
-  console.log(selectedTheme.value);
   theme.global.name.value = selectedTheme.value;
 };
 </script>

@@ -4,6 +4,7 @@ import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 // themes made from the builder: https://material-foundation.github.io/material-theme-builder/
 import materialTheme from '../assets/material-theme.json'
+import '@mdi/font/css/materialdesignicons.css'
 
 const themes: Record<string, ThemeDefinition> = {}
 

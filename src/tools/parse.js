@@ -2,17 +2,24 @@ import fs from 'fs';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
-const make_tree = (data) => {
+function make_tree(items, recipes, resources) {
+  // create a map of item class names to item names
   let item_map = {};
-  for (let item of data.items) {
+  for (let item of items) {
     item_map[item.className] = item.name;
   }
 
+  for (let resource of resources) {
+    item_map[resource.className] = resource.name;
+  }
+
+  // create a map of product names to the recipes that produce them
   let terminals = {};
-  for (let recipe of data.recipes) {
+  for (let recipe of recipes) {
     for (let product of recipe.product) {
       const product_name = item_map[product.name.split('.').pop()];
       if (!product_name) {
+        console.log(`Product not found in item map: ${product.name}`)
         continue;
       }
       if (!terminals[product_name]) {
@@ -26,8 +33,8 @@ const make_tree = (data) => {
     }
   }
 
-  let id = 0;
   // iterate over the terminals and form them into a useable tree for v-treeview
+  let id = 0;
   let tree = [];
   for (let terminal in terminals) {
     let node = {
@@ -56,7 +63,7 @@ function parse_ingredients(ingredients) {
   return result;
 }
 
-const parse_items = (jsonData) => {
+function parse_items(jsonData) {
   const item_native_class = "/Script/CoreUObject.Class'/Script/FactoryGame.FGItemDescriptor'";
   const targetObject = jsonData.find(item => item.NativeClass === item_native_class);
 
@@ -74,7 +81,7 @@ const parse_items = (jsonData) => {
   ));
 }
 
-const parse_recipes = (jsonData) => {
+function parse_recipes(jsonData) {
   const recipe_native_class = "/Script/CoreUObject.Class'/Script/FactoryGame.FGRecipe'";
   const targetObject = jsonData.find(item => item.NativeClass === recipe_native_class);
 
@@ -92,7 +99,7 @@ const parse_recipes = (jsonData) => {
   }));
 }
 
-const parse_resources = (jsonData) => {
+function parse_resources(jsonData){
   const recipe_native_class = "/Script/CoreUObject.Class'/Script/FactoryGame.FGResourceDescriptor'";
   const targetObject = jsonData.find(item => item.NativeClass === recipe_native_class);
 
@@ -102,6 +109,7 @@ const parse_resources = (jsonData) => {
 
   return targetObject.Classes.map(item => ({
     name: item.mDisplayName,
+    className: item.ClassName,
     description: item.mDescription,
     energyValue: item.mEnergyValue,
     radioactiveDecay: item.mRadioactiveDecay
@@ -130,11 +138,16 @@ const data = fs.readFileSync(filePath);
 
 const jsonData = JSON.parse(data);
 
-let result = {
-  items: parse_items(jsonData),
-  recipes: parse_recipes(jsonData),
-  resources: parse_resources(jsonData),
+const items = parse_items(jsonData);
+const recipes = parse_recipes(jsonData);
+const resources = parse_resources(jsonData);
+const tree = make_tree(items, recipes, resources);
+
+const result = {
+  items: items,
+  recipes: recipes,
+  resources: resources,
+  tree: tree
 };
-result.tree = make_tree(result);
 
 fs.writeFileSync(outputPath, JSON.stringify(result));

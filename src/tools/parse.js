@@ -53,7 +53,7 @@ const parse_recipes = (jsonData) => {
   }));
 }
 
-const parse_resource = (jsonData) => {
+const parse_resources = (jsonData) => {
   const recipe_native_class = "/Script/CoreUObject.Class'/Script/FactoryGame.FGResourceDescriptor'";
   const targetObject = jsonData.find(item => item.NativeClass === recipe_native_class);
 
@@ -94,7 +94,7 @@ const jsonData = JSON.parse(data);
 const result = {
   items: parse_items(jsonData),
   recipes: parse_recipes(jsonData),
-  resources: parse_resource(jsonData),
+  resources: parse_resources(jsonData),
 };
 
 fs.writeFileSync(outputPath, JSON.stringify(result));

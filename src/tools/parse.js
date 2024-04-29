@@ -2,6 +2,45 @@ import fs from 'fs';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
+const make_tree = (data) => {
+  let item_map = {};
+  for (let item of data.items) {
+    item_map[item.className] = item.name;
+  }
+
+  let terminals = {};
+  for (let recipe of data.recipes) {
+    for (let product of recipe.product) {
+      const product_name = item_map[product.name.split('.').pop()];
+      if (!product_name) {
+        continue;
+      }
+      if (!terminals[product_name]) {
+        terminals[product_name] = {
+          produced_by: [recipe.name]
+        }
+      }
+      else {
+        terminals[product_name].produced_by.push(recipe.name)
+      }
+    }
+  }
+
+  let id = 0;
+  // iterate over the terminals and form them into a useable tree for v-treeview
+  let tree = [];
+  for (let terminal in terminals) {
+    let node = {
+      id: id++,
+      title: terminal,
+      children: terminals[terminal].produced_by
+    }
+    tree.push(node)
+  }
+
+  return tree;
+}
+
 function parse_ingredients(ingredients) {
   const regex = /ItemClass=.*?'\"\/Game\/FactoryGame\/(.*?)\"',Amount=(\d+)/g;
   let match;
@@ -91,10 +130,11 @@ const data = fs.readFileSync(filePath);
 
 const jsonData = JSON.parse(data);
 
-const result = {
+let result = {
   items: parse_items(jsonData),
   recipes: parse_recipes(jsonData),
   resources: parse_resources(jsonData),
 };
+result.tree = make_tree(result);
 
 fs.writeFileSync(outputPath, JSON.stringify(result));

@@ -4,6 +4,7 @@
       <v-tab color="onSecondaryContainer">Chains</v-tab>
       <v-tab color="onSecondaryContainer">Items</v-tab>
       <v-tab color="onSecondaryContainer">Resources</v-tab>
+      <v-tab color="onSecondaryContainer">Network</v-tab>
     </v-tabs>
   </v-container>
   <v-container>
@@ -31,6 +32,13 @@
           </v-col>
         </v-row>
       </v-window-item>
+      <v-window-item value="Network">
+        <v-network-graph
+          class="graph"
+          :nodes="nodes"
+          :edges="edges"
+        />
+      </v-window-item>
     </v-window>
   </v-container>
 </template>
@@ -41,11 +49,21 @@ import data from '../assets/data.json';
 export default {
   data() {
     return {
+      tab: null,
       items: data.items,
       resources: data.resources,
-      tab: null,
-      tree: data.tree
+      tree: data.tree,
+      nodes: data.graph.nodes,
+      edges: data.graph.edges,
     };
   },
 };
 </script>
+
+<style>
+.graph {
+  width: 800px;
+  height: 600px;
+  border: 1px solid #000;
+}
+</style>

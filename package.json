@@ -10,6 +10,7 @@
     "parse": "node ./src/tools/parse.js -f ./src/assets/Docs.json -o src/assets/data.json"
   },
   "dependencies": {
+    "v-network-graph": "^0.9.16",
     "vue": "^3.4.21",
     "vue-router": "^4.0.13",
     "vuetify": "^3.5.17"

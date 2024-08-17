@@ -42,6 +42,7 @@ export default {
     const items = ref([
       { title: 'Home', icon: 'mdi-home', route: '/' },
       { title: 'About', icon: 'mdi-information', route: '/about' },
+      { title: 'Test', icon: 'mdi-wrench', route: '/test' },
     ]);
 
     const navigate = (route) => {

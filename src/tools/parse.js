@@ -1,8 +1,8 @@
-import fs from 'fs';
-import yargs from 'yargs';
-import { hideBin } from 'yargs/helpers';
+import fs from "fs";
+import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
 
-function make_tree(items, recipes, resources) {
+function make_item_map(items, resources) {
   // create a map of item class names to item names
   let item_map = {};
   for (let item of items) {
@@ -13,22 +13,25 @@ function make_tree(items, recipes, resources) {
     item_map[resource.className] = resource.name;
   }
 
+  return item_map;
+}
+
+function make_tree(recipes, item_map) {
   // create a map of product names to the recipes that produce them
   let terminals = {};
   for (let recipe of recipes) {
     for (let product of recipe.product) {
-      const product_name = item_map[product.name.split('.').pop()];
+      const product_name = item_map[product.name.split(".").pop()];
       if (!product_name) {
-        console.log(`Product not found in item map: ${product.name}`)
+        console.log(`Product not found in item map: ${product.name}`);
         continue;
       }
       if (!terminals[product_name]) {
         terminals[product_name] = {
-          produced_by: [recipe.name]
-        }
-      }
-      else {
-        terminals[product_name].produced_by.push(recipe.name)
+          produced_by: [recipe.name],
+        };
+      } else {
+        terminals[product_name].produced_by.push(recipe.name);
       }
     }
   }
@@ -40,12 +43,58 @@ function make_tree(items, recipes, resources) {
     let node = {
       id: id++,
       title: terminal,
-      children: terminals[terminal].produced_by
-    }
-    tree.push(node)
+      children: terminals[terminal].produced_by,
+    };
+    tree.push(node);
   }
 
   return tree;
+}
+
+function make_graph(items, recipes, resources, item_map) {
+  let nodes = {};
+  let edges = {};
+  let nodeCounter = 1;
+  let edgeCounter = 1;
+
+  for (let item of items) {
+    nodes[item.className] = {
+      name: item.name,
+    };
+  }
+
+  for (let resource of resources) {
+    nodes[resource.className] = {
+      name: resource.name,
+    };
+  }
+
+  for (let recipe of recipes) {
+    for (let product of recipe.product) {
+      const productClassName = product.name.split(".").pop();
+      const productName = item_map[productClassName];
+      if (!productName) {
+        console.log(`Product not found in item map: ${product.name}`);
+        continue;
+      }
+      nodes[product.name] = {
+        name: productName,
+      };
+      for (let ingredient of recipe.ingredients) {
+        edges[`edge${edgeCounter}`] = {
+          source: ingredient.name.split(".").pop(),
+          target: productClassName,
+          amount: ingredient.amount,
+        };
+      }
+      edgeCounter++;
+    }
+  }
+
+  return {
+    nodes: nodes,
+    edges: edges,
+  };
 }
 
 function parse_ingredients(ingredients) {
@@ -55,7 +104,7 @@ function parse_ingredients(ingredients) {
 
   while ((match = regex.exec(ingredients)) !== null) {
     result.push({
-      name: match[1].replace(/\//g, '.'),
+      name: match[1].replace(/\//g, "."),
       amount: parseInt(match[2], 10),
     });
   }
@@ -64,32 +113,37 @@ function parse_ingredients(ingredients) {
 }
 
 function parse_items(jsonData) {
-  const item_native_class = "/Script/CoreUObject.Class'/Script/FactoryGame.FGItemDescriptor'";
-  const targetObject = jsonData.find(item => item.NativeClass === item_native_class);
+  const item_native_class =
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGItemDescriptor'";
+  const targetObject = jsonData.find(
+    (item) => item.NativeClass === item_native_class
+  );
 
   if (!targetObject) {
-    throw new Error('Item class not found');
+    throw new Error("Item class not found");
   }
 
-  return targetObject.Classes.map(item => ({
-      name: item.mDisplayName,
-      className: item.ClassName,
-      description: item.mDescription,
-      energyValue: item.mEnergyValue,
-      radioactiveDecay: item.mRadioactiveDecay
-    }
-  ));
+  return targetObject.Classes.map((item) => ({
+    name: item.mDisplayName,
+    className: item.ClassName,
+    description: item.mDescription,
+    energyValue: item.mEnergyValue,
+    radioactiveDecay: item.mRadioactiveDecay,
+  }));
 }
 
 function parse_recipes(jsonData) {
-  const recipe_native_class = "/Script/CoreUObject.Class'/Script/FactoryGame.FGRecipe'";
-  const targetObject = jsonData.find(item => item.NativeClass === recipe_native_class);
+  const recipe_native_class =
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGRecipe'";
+  const targetObject = jsonData.find(
+    (item) => item.NativeClass === recipe_native_class
+  );
 
   if (!targetObject) {
-    throw new Error('Recipe class not found');
+    throw new Error("Recipe class not found");
   }
 
-  return targetObject.Classes.map(item => ({
+  return targetObject.Classes.map((item) => ({
     name: item.mDisplayName,
     ingredients: parse_ingredients(item.mIngredients),
     product: parse_ingredients(item.mProduct),
@@ -99,37 +153,39 @@ function parse_recipes(jsonData) {
   }));
 }
 
-function parse_resources(jsonData){
-  const recipe_native_class = "/Script/CoreUObject.Class'/Script/FactoryGame.FGResourceDescriptor'";
-  const targetObject = jsonData.find(item => item.NativeClass === recipe_native_class);
+function parse_resources(jsonData) {
+  const recipe_native_class =
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGResourceDescriptor'";
+  const targetObject = jsonData.find(
+    (item) => item.NativeClass === recipe_native_class
+  );
 
   if (!targetObject) {
-    throw new Error('Resource class not found');
+    throw new Error("Resource class not found");
   }
 
-  return targetObject.Classes.map(item => ({
+  return targetObject.Classes.map((item) => ({
     name: item.mDisplayName,
     className: item.ClassName,
     description: item.mDescription,
     energyValue: item.mEnergyValue,
-    radioactiveDecay: item.mRadioactiveDecay
+    radioactiveDecay: item.mRadioactiveDecay,
   }));
 }
 
 const argv = yargs(hideBin(process.argv))
-  .option('file', {
-    alias: 'f',
-    type: 'string',
-    description: 'Path to the file',
+  .option("file", {
+    alias: "f",
+    type: "string",
+    description: "Path to the file",
     demandOption: true,
   })
-  .option('output', {
-    alias: 'o',
-    type: 'string',
-    description: 'Path to the output file',
+  .option("output", {
+    alias: "o",
+    type: "string",
+    description: "Path to the output file",
     demandOption: true,
-  })
-  .argv;
+  }).argv;
 
 const filePath = argv.file;
 const outputPath = argv.output;
@@ -141,13 +197,20 @@ const jsonData = JSON.parse(data);
 const items = parse_items(jsonData);
 const recipes = parse_recipes(jsonData);
 const resources = parse_resources(jsonData);
-const tree = make_tree(items, recipes, resources);
+
+const item_map = make_item_map(items, resources);
+const tree = make_tree(recipes, resources, item_map);
+const { nodes, edges } = make_graph(items, recipes, resources, item_map);
 
 const result = {
   items: items,
   recipes: recipes,
   resources: resources,
-  tree: tree
+  tree: tree,
+  graph: {
+    nodes: nodes,
+    edges: edges,
+  },
 };
 
 fs.writeFileSync(outputPath, JSON.stringify(result));

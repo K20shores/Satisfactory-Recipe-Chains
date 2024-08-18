@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-tabs v-model="tab" grow bg-color="secondaryContainer">
-      <v-tab color="onSecondaryContainer">Chains</v-tab>
+      <v-tab color="onSecondaryContainer">Tree</v-tab>
       <v-tab color="onSecondaryContainer">Items</v-tab>
       <v-tab color="onSecondaryContainer">Resources</v-tab>
       <v-tab color="onSecondaryContainer">Network</v-tab>
@@ -9,7 +9,7 @@
   </v-container>
   <v-container>
     <v-window v-model="tab">
-      <v-window-item value="Chains">
+      <v-window-item value="Tree">
         <v-treeview :items="tree"></v-treeview>
       </v-window-item>
       <v-window-item value="Items">
@@ -37,6 +37,7 @@
           class="graph"
           :nodes="nodes"
           :edges="edges"
+          style="margin: 0 auto;"
         />
       </v-window-item>
     </v-window>
@@ -49,7 +50,7 @@ import data from '../assets/data.json';
 export default {
   data() {
     return {
-      tab: null,
+      tab: 'Tree',
       items: data.items,
       resources: data.resources,
       tree: data.tree,
@@ -64,6 +65,8 @@ export default {
 .graph {
   width: 800px;
   height: 600px;
-  border: 1px solid #000;
+  /* border: 1px solid rgba(0, 0, 0, 0.5); */
+  border-radius: 5%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 </style>

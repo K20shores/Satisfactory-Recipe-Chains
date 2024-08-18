@@ -23,7 +23,7 @@ function make_tree(recipes, item_map) {
     for (let product of recipe.product) {
       const product_name = item_map[product.name.split(".").pop()];
       if (!product_name) {
-        console.log(`Product not found in item map: ${product.name}`);
+        // console.log(`Product not found in item map: ${product.name}`);
         continue;
       }
       if (!terminals[product_name]) {
@@ -54,40 +54,43 @@ function make_tree(recipes, item_map) {
 function make_graph(items, recipes, resources, item_map) {
   let nodes = {};
   let edges = {};
-  let nodeCounter = 1;
   let edgeCounter = 1;
-
-  for (let item of items) {
-    nodes[item.className] = {
-      name: item.name,
-    };
-  }
-
-  for (let resource of resources) {
-    nodes[resource.className] = {
-      name: resource.name,
-    };
-  }
+  let connectedNodes = new Set();
 
   for (let recipe of recipes) {
     for (let product of recipe.product) {
       const productClassName = product.name.split(".").pop();
       const productName = item_map[productClassName];
       if (!productName) {
-        console.log(`Product not found in item map: ${product.name}`);
         continue;
       }
-      nodes[product.name] = {
-        name: productName,
-      };
+      connectedNodes.add(productClassName);
       for (let ingredient of recipe.ingredients) {
+        const ingredientClassName = ingredient.name.split(".").pop();
+        connectedNodes.add(ingredientClassName);
         edges[`edge${edgeCounter}`] = {
-          source: ingredient.name.split(".").pop(),
+          source: ingredientClassName,
           target: productClassName,
           amount: ingredient.amount,
         };
+        edgeCounter++;
       }
-      edgeCounter++;
+    }
+  }
+
+  for (let item of items) {
+    if (connectedNodes.has(item.className)) {
+      nodes[item.className] = {
+        name: item.name,
+      };
+    }
+  }
+
+  for (let resource of resources) {
+    if (connectedNodes.has(resource.className)) {
+      nodes[resource.className] = {
+        name: resource.name,
+      };
     }
   }
 
@@ -199,7 +202,7 @@ const recipes = parse_recipes(jsonData);
 const resources = parse_resources(jsonData);
 
 const item_map = make_item_map(items, resources);
-const tree = make_tree(recipes, resources, item_map);
+const tree = make_tree(recipes, item_map);
 const { nodes, edges } = make_graph(items, recipes, resources, item_map);
 
 const result = {

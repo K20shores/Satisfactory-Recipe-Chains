@@ -29,13 +29,15 @@ jobs:
           node-version: 20
           cache: 'npm'
 
+      - name: Set Base URL
+        id: set-base-url
+        run: echo "VITE_BASE_URL=/$(if [ '${{ github.ref_name }}' == 'main' ]; then echo 'Satisfactory-Recipe-Chains'; else echo '${{ github.ref_name }}-Satisfactory-Recipe-Chains'; fi)/" >> $GITHUB_ENV
+
       - name: Install dependencies
         run: npm ci
 
       - name: Build
         run: npm run build
-        env:
-          VITE_BASE_URL: /${{ github.ref_name == 'main' && 'Satisfactory-Recipe-Chains/' || github.ref_name + '-Satisfactory-Recipe-Chains/' }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

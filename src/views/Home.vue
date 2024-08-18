@@ -2,9 +2,9 @@
   <v-container>
     <v-tabs v-model="tab" grow bg-color="secondaryContainer">
       <!-- <v-tab color="onSecondaryContainer">Tree</v-tab> -->
+      <v-tab color="onSecondaryContainer">Network</v-tab>
       <v-tab color="onSecondaryContainer">Items</v-tab>
       <v-tab color="onSecondaryContainer">Resources</v-tab>
-      <v-tab color="onSecondaryContainer">Network</v-tab>
     </v-tabs>
   </v-container>
   <v-container>
@@ -12,6 +12,11 @@
       <!-- <v-window-item value="Tree">
         <v-treeview :items="tree"></v-treeview>
       </v-window-item> -->
+      <v-window-item value="Network">
+        <v-container>
+          <RecipeGraph />
+        </v-container>
+      </v-window-item>
       <v-window-item value="Items">
         <v-row>
           <v-col
@@ -52,11 +57,6 @@
           </v-col>
         </v-row>
       </v-window-item>
-      <v-window-item value="Network">
-        <v-container>
-          <RecipeGraph />
-        </v-container>
-      </v-window-item>
     </v-window>
   </v-container>
 </template>
@@ -71,7 +71,7 @@ export default {
   },
   data() {
     return {
-      tab: "Items",
+      tab: "Network",
       items: data.items,
       resources: data.resources,
       tree: data.tree,

@@ -40,8 +40,8 @@ export default {
       resources: data.resources,
       nodes: reactive({}),
       edges: data.graph.edges,
-      availableNodes: reactive({ ...data.graph.nodes }),
       search: "",
+      filteredNodeList: reactive({ ...data.graph.nodes }),
       configs: reactive(
         vNG.defineConfigs({
           view: {
@@ -68,28 +68,40 @@ export default {
   },
   computed: {
     filteredNodes() {
-      const searchLower = this.search.toLowerCase();
+      // only display nodes that are not already in the graph
+      // if search is empty, display all nodes (that are not already in the graph)
+      // if there is a searchk display nodes that contain the search string
       return Object.fromEntries(
-        Object.entries(this.availableNodes).filter(([key, node]) =>
-          node.name.toLowerCase().includes(searchLower)
+        Object.entries(this.filteredNodeList).filter(
+          ([nodeId, node]) => {
+            if (this.search) {
+              return (
+                !this.nodes[nodeId] &&
+                node.name.toLowerCase().includes(this.search.toLowerCase())
+              );
+            }
+            else {
+              return !this.nodes[nodeId];
+            }
+          }
         )
       );
     },
   },
   methods: {
     addNodeToGraph(nodeId) {
-      if (this.availableNodes[nodeId]) {
-        this.nodes[nodeId] = this.availableNodes[nodeId];
-        delete this.availableNodes[nodeId];
+      if (this.filteredNodeList[nodeId]) {
+        this.nodes[nodeId] = this.filteredNodeList[nodeId];
+        delete this.filteredNodeList[nodeId];
       }
     },
-  },
+  }
 };
 </script>
 
 <style scoped>
 .node-list {
-  max-height: 400px;
+  height: 600px;
   overflow-y: auto;
 }
 .graph {

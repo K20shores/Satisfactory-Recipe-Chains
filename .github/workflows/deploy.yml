@@ -28,6 +28,13 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
+      
+      - name: Print debug information
+        run: |
+          echo "Ref: ${{ github.ref }}"
+          echo "Ref Name: ${{ github.ref_name }}"
+          echo "Base URL: /$(if [ '${{ github.ref_name }}' == 'main' ]; then echo 'Satisfactory-Recipe-Chains'; else echo '${{ github.ref_name }}-Satisfactory-Recipe-Chains'; fi)/"
+          echo "Full URL: https://$GITHUB_REPOSITORY_OWNER.github.io/$(if [ '${{ github.ref_name }}' == 'main' ]; then echo 'Satisfactory-Recipe-Chains'; else echo '${{ github.ref_name }}-Satisfactory-Recipe-Chains'; fi)/"
 
       - name: Set Base URL
         id: set-base-url

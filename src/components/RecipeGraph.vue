@@ -61,7 +61,7 @@ const filteredNodeList = reactive({ ...data.graph.nodes });
 const configs = reactive(
   vNG.defineConfigs({
     node: {
-      selectable: true
+      selectable: true,
     },
     view: {
       grid: {
@@ -80,6 +80,28 @@ const configs = reactive(
         },
       },
       layoutHandler: new vNG.GridLayout({ grid: 10 }),
+    },
+    edge: {
+      marker: {
+        source: {
+          type: "none",
+          width: 4,
+          height: 4,
+          margin: -1,
+          offset: 0,
+          units: "strokeWidth",
+          color: null,
+        },
+        target: {
+          type: "arrow",
+          width: 4,
+          height: 4,
+          margin: -1,
+          offset: 0,
+          units: "strokeWidth",
+          color: null,
+        },
+      },
     },
   })
 );
@@ -127,8 +149,7 @@ const downloadGraph = async () => {
 };
 
 const eventHandlers = {
-  "node:click": ({ node }) => {
-  },
+  "node:click": ({ node }) => {},
 };
 </script>
 

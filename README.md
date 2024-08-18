@@ -9,11 +9,8 @@ This template should help get you started developing with Vue 3 and TypeScript i
 - Use [vue-tsc](https://github.com/vuejs/language-tools/tree/master/packages/tsc) for performing the same type checking from the command line, or for generating d.ts files for SFCs.
 
 
-- remove nodes from the graph
 - resources and recipes are all nodes of different color
   - edges should be inputs and know the number required going into something
-- add directions 
-  - what is an input and what is an output
 - resources are not available
   - end of line things may not be displayed right now
 

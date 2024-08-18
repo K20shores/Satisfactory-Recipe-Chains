@@ -2,10 +2,6 @@
   <v-container>
     <v-row>
       <v-col cols="3">
-        <v-btn @click="downloadGraph">
-          <v-icon>mdi-download</v-icon>
-          Download SVG
-        </v-btn>
         <v-text-field
           v-model="search"
           label="Search Nodes"
@@ -22,100 +18,116 @@
         </v-list>
       </v-col>
       <v-col cols="9">
+        <v-container class="demo-control-panel">
+          <v-row class="justify-space-around align-center">
+            <v-btn @click="removeNode" :disabled="selectedNodes.length === 0">
+              <v-icon>mdi-minus</v-icon>
+              Remove
+            </v-btn>
+            <v-btn @click="downloadGraph">
+              <v-icon>mdi-download</v-icon>
+              Download SVG
+            </v-btn>
+          </v-row>
+        </v-container>
         <v-network-graph
           ref="graph"
+          v-model:selected-nodes="selectedNodes"
           :nodes="nodes"
           :edges="edges"
           :configs="configs"
+          :event-handlers="eventHandlers"
         ></v-network-graph>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
-<script>
+<script setup>
+import { reactive, ref, computed } from "vue";
 import data from "../assets/data.json";
 import * as vNG from "v-network-graph";
-import { reactive, ref, onMounted } from "vue";
 
-export default {
-  setup() {
-    const graph = ref(null);
+const graph = ref(null);
+const selectedNodes = ref([]);
+const search = ref("");
 
-    const downloadGraph = async () => {
-      console.log(graph.value)
-      if (!graph.value) return
-      const text = await graph.value.exportAsSvgText()
-      const url = URL.createObjectURL(new Blob([text], { type: "octet/stream" }))
-      const a = document.createElement("a")
-      a.href = url
-      a.download = "network-graph.svg"
-      a.click()
-      window.URL.revokeObjectURL(url)
-    };
+const items = data.items;
+const resources = data.resources;
+const nodes = reactive({});
+const edges = reactive(data.graph.edges);
+const filteredNodeList = reactive({ ...data.graph.nodes });
 
-    return {
-      graph,
-      downloadGraph,
-    };
-  },
-  data() {
-    return {
-      items: data.items,
-      resources: data.resources,
-      nodes: reactive({}),
-      edges: data.graph.edges,
-      search: "",
-      filteredNodeList: reactive({ ...data.graph.nodes }),
-      configs: reactive(
-        vNG.defineConfigs({
-          view: {
-            grid: {
-              visible: true,
-              interval: 10,
-              thickIncrements: 5,
-              line: {
-                color: "#e0e0e0",
-                width: 1,
-                dasharray: 1,
-              },
-              thick: {
-                color: "#cccccc",
-                width: 1,
-                dasharray: 0,
-              },
-            },
-            layoutHandler: new vNG.GridLayout({ grid: 10 }),
-          },
-        })
-      ),
-    };
-  },
-  computed: {
-    filteredNodes() {
-      return Object.fromEntries(
-        Object.entries(this.filteredNodeList)
-          .filter(([nodeId, node]) => {
-            if (this.search) {
-              return (
-                !this.nodes[nodeId] &&
-                node.name.toLowerCase().includes(this.search.toLowerCase())
-              );
-            } else {
-              return !this.nodes[nodeId];
-            }
-          })
-          .sort((a, b) => a[1].name.localeCompare(b[1].name))
-      );
+const configs = reactive(
+  vNG.defineConfigs({
+    node: {
+      selectable: true
     },
-  },
-  methods: {
-    addNodeToGraph(nodeId) {
-      if (this.filteredNodeList[nodeId]) {
-        this.nodes[nodeId] = this.filteredNodeList[nodeId];
-        delete this.filteredNodeList[nodeId];
-      }
+    view: {
+      grid: {
+        visible: true,
+        interval: 10,
+        thickIncrements: 5,
+        line: {
+          color: "#e0e0e0",
+          width: 1,
+          dasharray: 1,
+        },
+        thick: {
+          color: "#cccccc",
+          width: 1,
+          dasharray: 0,
+        },
+      },
+      layoutHandler: new vNG.GridLayout({ grid: 10 }),
     },
+  })
+);
+
+const filteredNodes = computed(() => {
+  return Object.fromEntries(
+    Object.entries(filteredNodeList)
+      .filter(([nodeId, node]) => {
+        if (search.value) {
+          return (
+            !nodes[nodeId] &&
+            node.name.toLowerCase().includes(search.value.toLowerCase())
+          );
+        } else {
+          return !nodes[nodeId];
+        }
+      })
+      .sort((a, b) => a[1].name.localeCompare(b[1].name))
+  );
+});
+
+const addNodeToGraph = (nodeId) => {
+  if (filteredNodeList[nodeId]) {
+    nodes[nodeId] = filteredNodeList[nodeId];
+    delete filteredNodeList[nodeId];
+  }
+};
+
+const removeNode = () => {
+  selectedNodes.value.forEach((nodeId) => {
+    delete nodes[nodeId];
+  });
+  selectedNodes.value = [];
+};
+
+const downloadGraph = async () => {
+  if (!graph.value) return;
+  const text = await graph.value.exportAsSvgText();
+  const url = URL.createObjectURL(new Blob([text], { type: "octet/stream" }));
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "network-graph.svg";
+  a.click();
+  window.URL.revokeObjectURL(url);
+};
+
+const eventHandlers = {
+  "node:click": ({ node }) => {
   },
 };
 </script>

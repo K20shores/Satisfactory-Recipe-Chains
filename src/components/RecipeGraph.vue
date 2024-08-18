@@ -2,6 +2,10 @@
   <v-container>
     <v-row>
       <v-col cols="3">
+        <v-btn @click="downloadGraph">
+          <v-icon>mdi-download</v-icon>
+          Download SVG
+        </v-btn>
         <v-text-field
           v-model="search"
           label="Search Nodes"
@@ -19,6 +23,7 @@
       </v-col>
       <v-col cols="9">
         <v-network-graph
+          ref="graph"
           :nodes="nodes"
           :edges="edges"
           :configs="configs"
@@ -31,9 +36,29 @@
 <script>
 import data from "../assets/data.json";
 import * as vNG from "v-network-graph";
-import { reactive } from "vue";
+import { reactive, ref, onMounted } from "vue";
 
 export default {
+  setup() {
+    const graph = ref(null);
+
+    const downloadGraph = async () => {
+      console.log(graph.value)
+      if (!graph.value) return
+      const text = await graph.value.exportAsSvgText()
+      const url = URL.createObjectURL(new Blob([text], { type: "octet/stream" }))
+      const a = document.createElement("a")
+      a.href = url
+      a.download = "network-graph.svg"
+      a.click()
+      window.URL.revokeObjectURL(url)
+    };
+
+    return {
+      graph,
+      downloadGraph,
+    };
+  },
   data() {
     return {
       items: data.items,
@@ -68,23 +93,19 @@ export default {
   },
   computed: {
     filteredNodes() {
-      // only display nodes that are not already in the graph
-      // if search is empty, display all nodes (that are not already in the graph)
-      // if there is a searchk display nodes that contain the search string
       return Object.fromEntries(
-        Object.entries(this.filteredNodeList).filter(
-          ([nodeId, node]) => {
+        Object.entries(this.filteredNodeList)
+          .filter(([nodeId, node]) => {
             if (this.search) {
               return (
                 !this.nodes[nodeId] &&
                 node.name.toLowerCase().includes(this.search.toLowerCase())
               );
-            }
-            else {
+            } else {
               return !this.nodes[nodeId];
             }
-          }
-        )
+          })
+          .sort((a, b) => a[1].name.localeCompare(b[1].name))
       );
     },
   },
@@ -95,7 +116,7 @@ export default {
         delete this.filteredNodeList[nodeId];
       }
     },
-  }
+  },
 };
 </script>
 

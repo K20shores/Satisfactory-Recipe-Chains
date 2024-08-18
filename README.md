@@ -10,16 +10,12 @@ This template should help get you started developing with Vue 3 and TypeScript i
 
 
 - remove nodes from the graph
-- search list should come back up when removing search terms
-- graph shouldn't resize when searching
 - resources and recipes are all nodes of different color
   - edges should be inputs and know the number required going into something
-- display nodes alphabeticaly
 - add directions 
   - what is an input and what is an output
 - resources are not available
   - end of line things may not be displayed right now
-- add export to svg or png or whatever
 
 - edges represent recipes
   - consider making recipes be nodes

@@ -1,6 +1,7 @@
 import fs from "fs";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
+import { tableauColors } from "../constants";
 
 function make_item_map(items, resources) {
   // create a map of item class names to item names
@@ -55,22 +56,34 @@ function make_graph(items, recipes, resources, item_map) {
   let nodes = {};
   let edges = {};
   let edgeCounter = 1;
-  let connectedNodes = new Set();
+
+  const recipeColor = "#ff0000";
+  const itemColor = "#00ff00";
 
   for (let recipe of recipes) {
+    nodes[recipe.name] = {
+      name: recipe.name,
+      color: tableauColors.gray,
+      duration: recipe.duration,
+      powerConsumptionConstant: recipe.powerConsumptionConstant,
+      powerConsumptionFactor: recipe.powerConsumptionFactor,
+    };
     for (let product of recipe.product) {
       const productClassName = product.name.split(".").pop();
       const productName = item_map[productClassName];
       if (!productName) {
         continue;
       }
-      connectedNodes.add(productClassName);
+      edges[`edge${edgeCounter}`] = {
+        source: recipe.name,
+        target: productClassName,
+        amount: product.amount,
+      };
       for (let ingredient of recipe.ingredients) {
         const ingredientClassName = ingredient.name.split(".").pop();
-        connectedNodes.add(ingredientClassName);
         edges[`edge${edgeCounter}`] = {
           source: ingredientClassName,
-          target: productClassName,
+          target: recipe.name,
           amount: ingredient.amount,
         };
         edgeCounter++;
@@ -79,19 +92,17 @@ function make_graph(items, recipes, resources, item_map) {
   }
 
   for (let item of items) {
-    if (connectedNodes.has(item.className)) {
-      nodes[item.className] = {
-        name: item.name,
-      };
-    }
+    nodes[item.className] = {
+      name: item.name,
+      color: tableauColors.blue,
+    };
   }
 
   for (let resource of resources) {
-    if (connectedNodes.has(resource.className)) {
-      nodes[resource.className] = {
-        name: resource.name,
-      };
-    }
+    nodes[resource.className] = {
+      name: resource.name,
+      color: tableauColors.blue,
+    };
   }
 
   return {

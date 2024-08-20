@@ -18,7 +18,7 @@
         </v-list>
       </v-col>
       <v-col cols="9">
-        <v-container class="demo-control-panel">
+        <v-container class="control-panel">
           <v-row class="justify-space-around align-center">
             <v-btn @click="removeNode" :disabled="selectedNodes.length === 0">
               <v-icon>mdi-minus</v-icon>
@@ -28,6 +28,16 @@
               <v-icon>mdi-download</v-icon>
               Download SVG
             </v-btn>
+          </v-row>
+          <v-row class="justify-space-between align-center">
+            <span>
+              Recipe
+              <v-icon class="legend-circle gray-circle"></v-icon>
+            </span>
+            <span>
+              Item
+              <v-icon class="legend-circle blue-circle"></v-icon>
+            </span>
           </v-row>
         </v-container>
         <v-network-graph
@@ -62,6 +72,10 @@ const configs = reactive(
   vNG.defineConfigs({
     node: {
       selectable: true,
+      normal: {
+        type: "circle",
+        color: node => node.color,
+      },
     },
     view: {
       grid: {
@@ -107,6 +121,7 @@ const configs = reactive(
 );
 
 const filteredNodes = computed(() => {
+  console.log(Date.now());
   return Object.fromEntries(
     Object.entries(filteredNodeList)
       .filter(([nodeId, node]) => {
@@ -132,6 +147,7 @@ const addNodeToGraph = (nodeId) => {
 
 const removeNode = () => {
   selectedNodes.value.forEach((nodeId) => {
+    filteredNodeList[nodeId] = nodes[nodeId];
     delete nodes[nodeId];
   });
   selectedNodes.value = [];
@@ -162,5 +178,18 @@ const eventHandlers = {
   width: 800px;
   height: 600px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.legend-circle {
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.gray-circle {
+  background-color: #7f7f7f;
+}
+
+.blue-circle {
+  background-color: #1f77b4;
 }
 </style>

@@ -1,7 +1,7 @@
 import fs from "fs";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import { tableauColors } from "../constants";
+import { tableauColors } from "../assets/colors.js";
 
 function make_item_map(items, resources) {
   // create a map of item class names to item names
@@ -57,9 +57,6 @@ function make_graph(items, recipes, resources, item_map) {
   let edges = {};
   let edgeCounter = 1;
 
-  const recipeColor = "#ff0000";
-  const itemColor = "#00ff00";
-
   for (let recipe of recipes) {
     nodes[recipe.name] = {
       name: recipe.name,
@@ -70,23 +67,18 @@ function make_graph(items, recipes, resources, item_map) {
     };
     for (let product of recipe.product) {
       const productClassName = product.name.split(".").pop();
-      const productName = item_map[productClassName];
-      if (!productName) {
-        continue;
-      }
-      edges[`edge${edgeCounter}`] = {
+      edges[`edge${edgeCounter++}`] = {
         source: recipe.name,
         target: productClassName,
         amount: product.amount,
       };
       for (let ingredient of recipe.ingredients) {
         const ingredientClassName = ingredient.name.split(".").pop();
-        edges[`edge${edgeCounter}`] = {
+        edges[`edge${edgeCounter++}`] = {
           source: ingredientClassName,
           target: recipe.name,
           amount: ingredient.amount,
         };
-        edgeCounter++;
       }
     }
   }

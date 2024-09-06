@@ -1,6 +1,7 @@
 <template>
   <v-container>
     <v-row>
+      <!-- Column for the search input -->
       <v-col cols="3">
         <v-text-field
           v-model="search"
@@ -17,8 +18,11 @@
           </v-list-item>
         </v-list>
       </v-col>
+      <!-- Column for the graph and control panel -->
       <v-col cols="9">
+        <!-- Container for the control panel -->
         <v-container class="control-panel">
+          <!-- Row for the remove, download buttons, and layout checkbox -->
           <v-row class="justify-space-around align-center">
             <v-btn @click="removeNode" :disabled="selectedNodes.length === 0">
               <v-icon>mdi-minus</v-icon>
@@ -28,7 +32,9 @@
               <v-icon>mdi-download</v-icon>
               Download SVG
             </v-btn>
+            <v-checkbox v-model="d3ForceEnabled" label="Auto Layout" />
           </v-row>
+          <!-- Row for the legend -->
           <v-row class="justify-space-between align-center">
             <span>
               Recipe
@@ -40,6 +46,7 @@
             </span>
           </v-row>
         </v-container>
+        <!-- Network graph component -->
         <v-network-graph
           ref="graph"
           v-model:selected-nodes="selectedNodes"
@@ -47,7 +54,16 @@
           :edges="edges"
           :configs="configs"
           :event-handlers="eventHandlers"
-        ></v-network-graph>
+        >
+          <template #edge-label="{ edge, ...slotProps }">
+            <v-edge-label
+              :text="edge.amount"
+              align="center"
+              vertical-align="above"
+              v-bind="slotProps"
+            />
+          </template>
+        </v-network-graph>
       </v-col>
     </v-row>
   </v-container>
@@ -57,7 +73,9 @@
 import { reactive, ref, computed } from "vue";
 import data from "../assets/data.json";
 import * as vNG from "v-network-graph";
+import { ForceLayout } from "v-network-graph/lib/force-layout";
 
+// Existing variables and setup
 const graph = ref(null);
 const selectedNodes = ref([]);
 const search = ref("");
@@ -68,13 +86,26 @@ const nodes = reactive({});
 const edges = reactive(data.graph.edges);
 const filteredNodeList = reactive({ ...data.graph.nodes });
 
+// New computed property for managing the layout handler
+const d3ForceEnabled = computed({
+  get: () => configs.view.layoutHandler instanceof ForceLayout,
+  set: (value) => {
+    if (value) {
+      configs.view.layoutHandler = new ForceLayout();
+    } else {
+      configs.view.layoutHandler = new vNG.GridLayout({ grid: 10 });
+    }
+  },
+});
+
+// Configuration object with dynamic layout
 const configs = reactive(
   vNG.defineConfigs({
     node: {
       selectable: true,
       normal: {
         type: "circle",
-        color: node => node.color,
+        color: (node) => node.color,
       },
     },
     view: {
@@ -93,7 +124,7 @@ const configs = reactive(
           dasharray: 0,
         },
       },
-      layoutHandler: new vNG.GridLayout({ grid: 10 }),
+      layoutHandler: new ForceLayout(),
     },
     edge: {
       marker: {
@@ -121,7 +152,6 @@ const configs = reactive(
 );
 
 const filteredNodes = computed(() => {
-  console.log(Date.now());
   return Object.fromEntries(
     Object.entries(filteredNodeList)
       .filter(([nodeId, node]) => {

@@ -28,11 +28,11 @@
               <v-icon>mdi-minus</v-icon>
               Remove
             </v-btn>
-            <v-btn @click="downloadGraph">
+            <v-btn @click="downloadGraph" color="primary">
               <v-icon>mdi-download</v-icon>
               Download SVG
             </v-btn>
-            <v-checkbox v-model="d3ForceEnabled" label="Auto Layout" />
+            <v-checkbox v-model="d3ForceEnabled" label="Auto Layout" hide-details/>
           </v-row>
           <!-- Row for the legend -->
           <v-row class="justify-space-between align-center">

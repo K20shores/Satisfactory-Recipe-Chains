@@ -32,7 +32,11 @@
               <v-icon>mdi-download</v-icon>
               Download SVG
             </v-btn>
-            <v-checkbox v-model="d3ForceEnabled" label="Auto Layout" hide-details/>
+            <v-checkbox
+              v-model="d3ForceEnabled"
+              label="Auto Layout"
+              hide-details
+            />
           </v-row>
           <!-- Row for the legend -->
           <v-row class="justify-space-between align-center">
@@ -57,12 +61,36 @@
         >
           <template #edge-label="{ edge, ...slotProps }">
             <v-edge-label
-              :text="edge.amount"
+              :text="`${edge.amount}`"
               align="center"
               vertical-align="above"
               v-bind="slotProps"
             />
           </template>
+          <!-- <template #edge-overlay="{ edge, scale, length, pointAtLength }">
+            <g
+              class="edge-icon"
+              :transform="`translate(${pointAtLength(0).x}, ${
+                pointAtLength(length).y
+              })`"
+            >
+              <foreignObject
+                :width="24 * scale"
+                :height="24 * scale"
+                x="-12"
+                y="-12"
+              >
+                <svg
+                  :width="24 * scale"
+                  :height="24 * scale"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path :d="mdiLightningBolt" fill="gold" stroke="black" stroke-width="1" />
+                </svg>
+              </foreignObject>
+            </g>
+          </template> -->
         </v-network-graph>
       </v-col>
     </v-row>
@@ -70,10 +98,22 @@
 </template>
 
 <script setup>
-import { reactive, ref, computed } from "vue";
+import { reactive, ref, computed, watch, onMounted } from "vue";
 import data from "../assets/data.json";
 import * as vNG from "v-network-graph";
 import { ForceLayout } from "v-network-graph/lib/force-layout";
+import { mdiLightningBolt } from "@mdi/js";
+
+// Load nodes from local storage
+const loadNodesFromLocalStorage = () => {
+  const savedNodes = localStorage.getItem("nodes");
+  return savedNodes ? JSON.parse(savedNodes) : {};
+};
+
+// Save nodes to local storage
+const saveNodesToLocalStorage = (nodes) => {
+  localStorage.setItem("nodes", JSON.stringify(nodes));
+};
 
 // Existing variables and setup
 const graph = ref(null);
@@ -82,7 +122,7 @@ const search = ref("");
 
 const items = data.items;
 const resources = data.resources;
-const nodes = reactive({});
+const nodes = reactive(loadNodesFromLocalStorage());
 const edges = reactive(data.graph.edges);
 const filteredNodeList = reactive({ ...data.graph.nodes });
 
@@ -175,6 +215,11 @@ const addNodeToGraph = (nodeId) => {
   }
 };
 
+// Watch for changes to nodes and save to local storage
+watch(nodes, (newNodes) => {
+  saveNodesToLocalStorage(newNodes);
+}, { deep: true });
+
 const removeNode = () => {
   selectedNodes.value.forEach((nodeId) => {
     filteredNodeList[nodeId] = nodes[nodeId];
@@ -197,6 +242,12 @@ const downloadGraph = async () => {
 const eventHandlers = {
   "node:click": ({ node }) => {},
 };
+
+// Load nodes from local storage when the component is created
+onMounted(() => {
+  Object.assign(nodes, loadNodesFromLocalStorage());
+});
+
 </script>
 
 <style scoped>

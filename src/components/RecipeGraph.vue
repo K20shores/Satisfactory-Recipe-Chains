@@ -129,7 +129,6 @@ const availableNodes = computed(() => {
   );
 });
 
-
 const addNodeToGraph = (nodeId) => {
   if (!displayedNodes.value[nodeId]) {
     displayedNodes.value[nodeId] = { ...data.graph.nodes[nodeId] };
@@ -139,10 +138,9 @@ const addNodeToGraph = (nodeId) => {
 const removeNode = () => {
   selectedNodes.value.forEach((nodeId) => {
     if (displayedNodes.value[nodeId]) {
-      // Delete node and create a new object to trigger reactivity
       const updatedNodes = { ...displayedNodes.value };
       delete updatedNodes[nodeId];
-      displayedNodes.value = updatedNodes; // Reassign to trigger reactivity
+      displayedNodes.value = updatedNodes;
     }
   });
   selectedNodes.value = [];
@@ -162,13 +160,9 @@ const saveNodesToLocalStorage = (nodes) => {
   localStorage.setItem("nodes", JSON.stringify(nodes));
 };
 
-watch(
-  displayedNodes,
-  (newNodes) => {
-    saveNodesToLocalStorage(newNodes);
-  },
-  { deep: false, flush: "post" }
-);
+watch(displayedNodes, (newNodes) => {
+  saveNodesToLocalStorage(newNodes);
+}, { deep: true });
 
 
 const downloadGraph = async () => {
@@ -183,7 +177,11 @@ const downloadGraph = async () => {
 };
 
 onMounted(() => {
-  Object.assign(displayedNodes, loadNodesFromLocalStorage());
+  // Load nodes from local storage
+  const savedNodes = loadNodesFromLocalStorage();
+  if (savedNodes) {
+    displayedNodes.value = savedNodes;
+  }
 });
 
 const d3ForceEnabled = computed({

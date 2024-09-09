@@ -1,7 +1,6 @@
 import fs from "fs";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import { tableauColors } from "../assets/colors.js";
 
 function make_item_map(items, resources) {
   // create a map of item class names to item names
@@ -60,10 +59,10 @@ function make_graph(items, recipes, resources, item_map) {
   for (let recipe of recipes) {
     nodes[recipe.name] = {
       name: recipe.name,
-      color: tableauColors.gray,
       duration: recipe.duration,
       powerConsumptionConstant: recipe.powerConsumptionConstant,
       powerConsumptionFactor: recipe.powerConsumptionFactor,
+      isRecipe: true,
     };
     for (let product of recipe.product) {
       const productClassName = product.name.split(".").pop();
@@ -86,14 +85,14 @@ function make_graph(items, recipes, resources, item_map) {
   for (let item of items) {
     nodes[item.className] = {
       name: item.name,
-      color: tableauColors.blue,
+      isRecipe: false
     };
   }
 
   for (let resource of resources) {
     nodes[resource.className] = {
       name: resource.name,
-      color: tableauColors.blue,
+      isRecipe: false
     };
   }
 
@@ -206,17 +205,14 @@ const resources = parse_resources(jsonData);
 
 const item_map = make_item_map(items, resources);
 const tree = make_tree(recipes, item_map);
-const { nodes, edges } = make_graph(items, recipes, resources, item_map);
+const graph = make_graph(items, recipes, resources, item_map);
 
 const result = {
   items: items,
   recipes: recipes,
   resources: resources,
   tree: tree,
-  graph: {
-    nodes: nodes,
-    edges: edges,
-  },
+  graph: { ...graph },
 };
 
 fs.writeFileSync(outputPath, JSON.stringify(result));

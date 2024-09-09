@@ -2,9 +2,15 @@
   <v-container>
     <v-tabs v-model="tab" grow bg-color="secondaryContainer">
       <!-- <v-tab color="onSecondaryContainer">Tree</v-tab> -->
-      <v-tab color="onSecondaryContainer">Network</v-tab>
-      <v-tab color="onSecondaryContainer">Items</v-tab>
-      <v-tab color="onSecondaryContainer">Resources</v-tab>
+      <v-tab color="onSecondaryContainer">
+        Network <v-icon icon="mdi-graph-outline" color="onSecondaryContainer" size="24"></v-icon>
+      </v-tab>
+      <v-tab color="onSecondaryContainer">
+        Items <v-icon icon="mdi-package-variant-closed" color="onSecondaryContainer" size="24"></v-icon>
+      </v-tab>
+      <v-tab color="onSecondaryContainer">
+        Resources <v-icon icon="mdi-cube-outline" color="onSecondaryContainer" size="24"></v-icon>
+      </v-tab>
     </v-tabs>
   </v-container>
   <v-container>

@@ -1,16 +1,17 @@
 <template>
   <v-container>
     <h1>Test</h1>
-    <RecipeGraph />
+    <ThemeViewer />
   </v-container>
 </template>
 
 <script>
 import RecipeGraph from '../components/RecipeGraph.vue'
+import ThemeViewer from '../components/ThemeViewer.vue'
 
 export default {
   components: {
-    RecipeGraph
+    ThemeViewer
   },
   data() {
     return {

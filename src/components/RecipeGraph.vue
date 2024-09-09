@@ -10,7 +10,7 @@
         ></v-text-field>
         <v-list class="node-list">
           <v-list-item
-            v-for="(node, nodeId) in filteredNodes"
+            v-for="(node, nodeId) in availableNodes"
             :key="nodeId"
             @click="addNodeToGraph(nodeId)"
           >
@@ -27,6 +27,10 @@
             <v-btn @click="removeNode" :disabled="selectedNodes.length === 0">
               <v-icon>mdi-minus</v-icon>
               Remove
+            </v-btn>
+            <v-btn @click="clearGraph">
+              <v-icon>mdi-delete</v-icon>
+              Clear
             </v-btn>
             <v-btn @click="downloadGraph" color="primary">
               <v-icon>mdi-download</v-icon>
@@ -54,10 +58,9 @@
         <v-network-graph
           ref="graph"
           v-model:selected-nodes="selectedNodes"
-          :nodes="nodes"
+          :nodes="displayedNodes"
           :edges="edges"
           :configs="configs"
-          :event-handlers="eventHandlers"
         >
           <template #edge-label="{ edge, ...slotProps }">
             <v-edge-label
@@ -84,7 +87,6 @@
                   :width="24 * scale"
                   :height="24 * scale"
                   viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path :d="mdiLightningBolt" fill="gold" stroke="black" stroke-width="1" />
                 </svg>
@@ -104,29 +106,86 @@ import * as vNG from "v-network-graph";
 import { ForceLayout } from "v-network-graph/lib/force-layout";
 import { mdiLightningBolt } from "@mdi/js";
 
-// Load nodes from local storage
-const loadNodesFromLocalStorage = () => {
-  const savedNodes = localStorage.getItem("nodes");
-  return savedNodes ? JSON.parse(savedNodes) : {};
-};
-
-// Save nodes to local storage
-const saveNodesToLocalStorage = (nodes) => {
-  localStorage.setItem("nodes", JSON.stringify(nodes));
-};
-
-// Existing variables and setup
 const graph = ref(null);
 const selectedNodes = ref([]);
 const search = ref("");
 
 const items = data.items;
 const resources = data.resources;
-const nodes = reactive(loadNodesFromLocalStorage());
-const edges = reactive(data.graph.edges);
-const filteredNodeList = reactive({ ...data.graph.nodes });
+const displayedNodes = ref({});
+const edges = data.graph.edges;
 
-// New computed property for managing the layout handler
+const availableNodes = computed(() => {
+  return Object.fromEntries(
+    Object.entries(data.graph.nodes)
+      .filter(([nodeId, node]) => {
+        if (search.value) {
+          return !displayedNodes.value[nodeId] && node.name.toLowerCase().includes(search.value.toLowerCase());
+        } else {
+          return !displayedNodes.value[nodeId];
+        }
+      })
+      .sort((a, b) => a[1].name.localeCompare(b[1].name))
+  );
+});
+
+
+const addNodeToGraph = (nodeId) => {
+  if (!displayedNodes.value[nodeId]) {
+    displayedNodes.value[nodeId] = { ...data.graph.nodes[nodeId] };
+  }
+};
+
+const removeNode = () => {
+  selectedNodes.value.forEach((nodeId) => {
+    if (displayedNodes.value[nodeId]) {
+      // Delete node and create a new object to trigger reactivity
+      const updatedNodes = { ...displayedNodes.value };
+      delete updatedNodes[nodeId];
+      displayedNodes.value = updatedNodes; // Reassign to trigger reactivity
+    }
+  });
+  selectedNodes.value = [];
+};
+
+const clearGraph = () => {
+  displayedNodes.value = {};
+  selectedNodes.value = [];
+};
+
+const loadNodesFromLocalStorage = () => {
+  const savedNodes = localStorage.getItem("nodes");
+  return savedNodes ? JSON.parse(savedNodes) : {};
+};
+
+const saveNodesToLocalStorage = (nodes) => {
+  localStorage.setItem("nodes", JSON.stringify(nodes));
+};
+
+watch(
+  displayedNodes,
+  (newNodes) => {
+    saveNodesToLocalStorage(newNodes);
+  },
+  { deep: false, flush: "post" }
+);
+
+
+const downloadGraph = async () => {
+  if (!graph.value) return;
+  const text = await graph.value.exportAsSvgText();
+  const url = URL.createObjectURL(new Blob([text], { type: "octet/stream" }));
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "network-graph.svg";
+  a.click();
+  window.URL.revokeObjectURL(url);
+};
+
+onMounted(() => {
+  Object.assign(displayedNodes, loadNodesFromLocalStorage());
+});
+
 const d3ForceEnabled = computed({
   get: () => configs.view.layoutHandler instanceof ForceLayout,
   set: (value) => {
@@ -138,28 +197,27 @@ const d3ForceEnabled = computed({
   },
 });
 
-// Configuration object with dynamic layout
 const configs = reactive(
   vNG.defineConfigs({
     node: {
       selectable: true,
       normal: {
         type: "circle",
-        color: (node) => node.color,
+        color: (node) => node.isRecipe ? "rgb(var(--v-theme-primary))" : "rgb(var(--v-theme-secondary-darken-1))",
       },
     },
     view: {
       grid: {
         visible: true,
-        interval: 10,
+        interval: 15,
         thickIncrements: 5,
         line: {
-          color: "#e0e0e0",
+          color: "rgb(var(--v-theme-surfaceTint))",
           width: 1,
           dasharray: 1,
         },
         thick: {
-          color: "#cccccc",
+          color: "rgb(var(--v-theme-secondary))",
           width: 1,
           dasharray: 0,
         },
@@ -190,64 +248,6 @@ const configs = reactive(
     },
   })
 );
-
-const filteredNodes = computed(() => {
-  return Object.fromEntries(
-    Object.entries(filteredNodeList)
-      .filter(([nodeId, node]) => {
-        if (search.value) {
-          return (
-            !nodes[nodeId] &&
-            node.name.toLowerCase().includes(search.value.toLowerCase())
-          );
-        } else {
-          return !nodes[nodeId];
-        }
-      })
-      .sort((a, b) => a[1].name.localeCompare(b[1].name))
-  );
-});
-
-const addNodeToGraph = (nodeId) => {
-  if (filteredNodeList[nodeId]) {
-    nodes[nodeId] = filteredNodeList[nodeId];
-    delete filteredNodeList[nodeId];
-  }
-};
-
-// Watch for changes to nodes and save to local storage
-watch(nodes, (newNodes) => {
-  saveNodesToLocalStorage(newNodes);
-}, { deep: true });
-
-const removeNode = () => {
-  selectedNodes.value.forEach((nodeId) => {
-    filteredNodeList[nodeId] = nodes[nodeId];
-    delete nodes[nodeId];
-  });
-  selectedNodes.value = [];
-};
-
-const downloadGraph = async () => {
-  if (!graph.value) return;
-  const text = await graph.value.exportAsSvgText();
-  const url = URL.createObjectURL(new Blob([text], { type: "octet/stream" }));
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "network-graph.svg";
-  a.click();
-  window.URL.revokeObjectURL(url);
-};
-
-const eventHandlers = {
-  "node:click": ({ node }) => {},
-};
-
-// Load nodes from local storage when the component is created
-onMounted(() => {
-  Object.assign(nodes, loadNodesFromLocalStorage());
-});
-
 </script>
 
 <style scoped>
@@ -267,10 +267,10 @@ onMounted(() => {
 }
 
 .gray-circle {
-  background-color: #7f7f7f;
+  background-color: rgb(var(--v-theme-primary));
 }
 
 .blue-circle {
-  background-color: #1f77b4;
+  background-color: rgb(var(--v-theme-secondary-darken-1));
 }
 </style>

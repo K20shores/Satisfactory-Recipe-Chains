@@ -6,7 +6,16 @@
           <p color="onSecondary">© {{ currentYear }} James Hollas & Kyle Shores</p>
         </v-col>
         <v-col cols="6">
-          <p color="onSecondary" class="text-right">Version: {{ packageVersion }}</p>
+          <v-row justify="end" align="center">
+            <v-col cols="auto">
+              <p color="onSecondary" class="text-right">Version: {{ packageVersion }}</p>
+            </v-col>
+            <v-col cols="auto">
+              <a href="https://github.com/K20shores/Satisfactory-Recipe-Chains">
+                <v-icon color="onSecondary">mdi-github</v-icon>
+              </a>
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
     </v-container>

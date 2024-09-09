@@ -210,10 +210,10 @@ const configs = reactive(
     view: {
       grid: {
         visible: true,
-        interval: 20,
+        interval: 10,
         thickIncrements: 5,
         line: {
-          color: "rgb(var(--v-theme-surfaceTint))",
+          color: "rgb(var(--v-theme-primary))",
           width: 1,
           dasharray: 1,
         },

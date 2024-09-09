@@ -46,11 +46,11 @@
           <v-row class="justify-space-between align-center">
             <span>
               Recipe
-              <v-icon class="legend-circle gray-circle"></v-icon>
+              <v-icon class="legend-circle recipe-legend"></v-icon>
             </span>
             <span>
               Item
-              <v-icon class="legend-circle blue-circle"></v-icon>
+              <v-icon class="legend-circle item-legend"></v-icon>
             </span>
           </v-row>
         </v-container>
@@ -177,7 +177,6 @@ const downloadGraph = async () => {
 };
 
 onMounted(() => {
-  // Load nodes from local storage
   const savedNodes = loadNodesFromLocalStorage();
   if (savedNodes) {
     displayedNodes.value = savedNodes;
@@ -203,11 +202,15 @@ const configs = reactive(
         type: "circle",
         color: (node) => node.isRecipe ? "rgb(var(--v-theme-primary))" : "rgb(var(--v-theme-secondary-darken-1))",
       },
+      label: {
+        text: (node) => node.name,
+        color: "rgb(var(--v-theme-on-background))",
+      },
     },
     view: {
       grid: {
         visible: true,
-        interval: 15,
+        interval: 20,
         thickIncrements: 5,
         line: {
           color: "rgb(var(--v-theme-surfaceTint))",
@@ -264,11 +267,11 @@ const configs = reactive(
   display: inline-block;
 }
 
-.gray-circle {
+.recipe-legend {
   background-color: rgb(var(--v-theme-primary));
 }
 
-.blue-circle {
+.item-legend {
   background-color: rgb(var(--v-theme-secondary-darken-1));
 }
 </style>

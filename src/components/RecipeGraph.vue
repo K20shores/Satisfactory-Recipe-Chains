@@ -30,6 +30,11 @@
               <v-icon>mdi-delete</v-icon>
             </v-btn>
             <v-checkbox v-model="d3ForceEnabled" label="Auto Layout" hide-details dense></v-checkbox>
+            <!--- Add a button that copies the svg to the clipbaord as a png -->
+            <v-btn @click="copySvgToClipboardAsPng" color="primary" >
+              Copy to Clipboard
+              <v-icon>mdi-content-copy</v-icon>
+            </v-btn>
             <v-btn @click="saveToSVG" color="primary" >
               Save SVG
               <v-icon>mdi-image</v-icon>
@@ -172,16 +177,109 @@ watch(
   { deep: true }
 );
 
+// Shared functionality to replace color variables in SVG
+const replaceColorInSVG = (svgElement) => {
+  const computedStyle = getComputedStyle(document.documentElement);
+  
+  const getColor = (colorVar) => {
+    return `rgb(${computedStyle.getPropertyValue(colorVar).trim()})`;
+  };
+
+  svgElement.querySelectorAll('[fill], [stroke], [color]').forEach(el => {
+    const fill = el.getAttribute('fill');
+    const stroke = el.getAttribute('stroke');
+    const color = el.getAttribute('color');
+
+    if (color && color.includes('var(--v-theme-')) {
+      el.setAttribute('color', getColor(color.slice(8, -2)));
+    }
+    
+    if (fill && fill.includes('var(--v-theme-')) {
+      el.setAttribute('fill', getColor(fill.slice(8, -2)));
+    }
+    
+    if (stroke && stroke.includes('var(--v-theme-')) {
+      el.setAttribute('stroke', getColor(stroke.slice(8, -2)));
+    }
+  });
+};
+
+// Function to save SVG to file
 const saveToSVG = async () => {
   if (!graph.value) return;
-  const text = await graph.value.exportAsSvgText();
-  const url = URL.createObjectURL(new Blob([text], { type: "octet/stream" }));
+
+  // Get the SVG content as text
+  let svgText = await graph.value.exportAsSvgText();
+
+  // Parse the SVG text to manipulate it
+  const parser = new DOMParser();
+  const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
+  const svgElement = svgDoc.documentElement;
+
+  // Replace color variables in the SVG
+  replaceColorInSVG(svgElement);
+
+  // Convert the updated SVG element back to text
+  const serializer = new XMLSerializer();
+  const serializedSvgText = serializer.serializeToString(svgElement);
+
+  // Trigger download of the SVG
+  const url = URL.createObjectURL(new Blob([serializedSvgText], { type: "image/svg+xml" }));
   const a = document.createElement("a");
   a.href = url;
   a.download = "network-graph.svg";
   a.click();
   window.URL.revokeObjectURL(url);
 };
+
+// Function to copy SVG as PNG to clipboard
+const copySvgToClipboardAsPng = async () => {
+  if (!graph.value) return;
+
+  // Get the SVG content as text
+  let svgText = await graph.value.exportAsSvgText();
+
+  // Create a DOMParser to parse the SVG text
+  const parser = new DOMParser();
+  const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
+  const svgElement = svgDoc.documentElement;
+
+  // Replace color variables in the SVG
+  replaceColorInSVG(svgElement);
+
+  // Create a Blob from the updated SVG text
+  const svgBlob = new Blob([new XMLSerializer().serializeToString(svgElement)], { type: 'image/svg+xml;charset=utf-8' });
+  const svgUrl = URL.createObjectURL(svgBlob);
+
+  // Create an off-screen canvas and draw the SVG onto it
+  const img = new Image();
+  img.src = svgUrl;
+  
+  img.onload = async () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx = canvas.getContext('2d');
+
+    // Draw the SVG image onto the canvas
+    ctx.drawImage(img, 0, 0);
+
+    // Convert the canvas to a Blob (PNG format) and copy to clipboard
+    canvas.toBlob(async (blob) => {
+      try {
+        await navigator.clipboard.write([
+          new ClipboardItem({ [blob.type]: blob })
+        ]);
+      } catch (err) {
+        console.error('Failed to copy: ', err);
+      }
+    }, 'image/png');
+
+    // Clean up
+    URL.revokeObjectURL(svgUrl);
+  };
+};
+
 
 const exportGraphAsJson = () => {
   const nodesJson = JSON.stringify(displayedNodes.value, null, 2);

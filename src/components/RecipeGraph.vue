@@ -22,25 +22,25 @@
       <v-col cols="9">
         <!-- Container for the control panel -->
         <v-container class="control-panel">
-          <!-- Row for the remove, download buttons, and layout checkbox -->
           <v-row class="justify-space-around align-center">
-            <v-btn @click="removeNode" :disabled="selectedNodes.length === 0">
+            <v-btn @click="removeNode" :disabled="selectedNodes.length === 0" icon>
               <v-icon>mdi-minus</v-icon>
-              Remove
             </v-btn>
-            <v-btn @click="clearGraph">
+            <v-btn @click="clearGraph" icon>
               <v-icon>mdi-delete</v-icon>
-              Clear
             </v-btn>
-            <v-btn @click="downloadGraph" color="primary">
+            <v-checkbox v-model="d3ForceEnabled" label="Auto Layout" hide-details dense></v-checkbox>
+            <v-btn @click="saveToSVG" color="primary" >
+              Save SVG
+              <v-icon>mdi-image</v-icon>
+            </v-btn>
+            <v-btn @click="exportGraphAsJson" color="primary" icon>
               <v-icon>mdi-download</v-icon>
-              Download SVG
             </v-btn>
-            <v-checkbox
-              v-model="d3ForceEnabled"
-              label="Auto Layout"
-              hide-details
-            />
+            <v-btn @click="uploadGraph" color="primary" icon>
+              <v-icon>mdi-upload</v-icon>
+            </v-btn>
+            <input type="file" @change="handleFileUpload" style="display: none" ref="fileInput">
           </v-row>
           <!-- Row for the legend -->
           <v-row class="justify-space-between align-center">
@@ -114,13 +114,17 @@ const items = data.items;
 const resources = data.resources;
 const displayedNodes = ref({});
 const edges = data.graph.edges;
+const fileInput = ref(null);
 
 const availableNodes = computed(() => {
   return Object.fromEntries(
     Object.entries(data.graph.nodes)
       .filter(([nodeId, node]) => {
         if (search.value) {
-          return !displayedNodes.value[nodeId] && node.name.toLowerCase().includes(search.value.toLowerCase());
+          return (
+            !displayedNodes.value[nodeId] &&
+            node.name.toLowerCase().includes(search.value.toLowerCase())
+          );
         } else {
           return !displayedNodes.value[nodeId];
         }
@@ -160,12 +164,15 @@ const saveNodesToLocalStorage = (nodes) => {
   localStorage.setItem("nodes", JSON.stringify(nodes));
 };
 
-watch(displayedNodes, (newNodes) => {
-  saveNodesToLocalStorage(newNodes);
-}, { deep: true });
+watch(
+  displayedNodes,
+  (newNodes) => {
+    saveNodesToLocalStorage(newNodes);
+  },
+  { deep: true }
+);
 
-
-const downloadGraph = async () => {
+const saveToSVG = async () => {
   if (!graph.value) return;
   const text = await graph.value.exportAsSvgText();
   const url = URL.createObjectURL(new Blob([text], { type: "octet/stream" }));
@@ -175,6 +182,41 @@ const downloadGraph = async () => {
   a.click();
   window.URL.revokeObjectURL(url);
 };
+
+const exportGraphAsJson = () => {
+  const nodesJson = JSON.stringify(displayedNodes.value, null, 2);
+  const blob = new Blob([nodesJson], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "graph-nodes.json";
+  a.click();
+  URL.revokeObjectURL(url);
+};
+
+const uploadGraph = () => {
+  if (fileInput.value) fileInput.value.click();
+};
+
+const handleFileUpload = (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const content = e.target.result;
+    try {
+      const nodes = JSON.parse(content);
+      displayedNodes.value = nodes;
+      selectedNodes.value = [];
+    } catch (err) {
+      alert("Invalid JSON file format. Please upload a valid file.");
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = null;
+};
+
 
 onMounted(() => {
   const savedNodes = loadNodesFromLocalStorage();
@@ -200,7 +242,10 @@ const configs = reactive(
       selectable: true,
       normal: {
         type: "circle",
-        color: (node) => node.isRecipe ? "rgb(var(--v-theme-primary))" : "rgb(var(--v-theme-secondary-darken-1))",
+        color: (node) =>
+          node.isRecipe
+            ? "rgb(var(--v-theme-primary))"
+            : "rgb(var(--v-theme-secondary-darken-1))",
       },
       label: {
         text: (node) => node.name,

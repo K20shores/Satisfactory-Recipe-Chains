@@ -22,30 +22,50 @@
       <v-col cols="9">
         <!-- Container for the control panel -->
         <v-container class="control-panel">
-          <v-row class="justify-space-around align-center">
-            <v-btn @click="removeNode" :disabled="selectedNodes.length === 0" icon>
+          <v-row class="justify-space-between align-center">
+            <!-- Hamburger menu with options -->
+            <v-menu offset-y>
+              <template v-slot:activator="{ props }">
+                <v-btn icon v-bind="props">
+                  <v-icon>mdi-menu</v-icon>
+                </v-btn>
+              </template>
+              <v-list>
+                <v-list-item @click="copySvgToClipboardAsPng">
+                  <v-icon left>mdi-content-copy</v-icon>
+                  <v-list-item-title>Copy to Clipboard</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="saveToSVG">
+                  <v-icon left>mdi-image</v-icon>
+                  <v-list-item-title>Save SVG</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="exportGraphAsJson">
+                  <v-icon left>mdi-download</v-icon>
+                  <v-list-item-title>Download JSON</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="uploadGraph">
+                  <v-icon left>mdi-upload</v-icon>
+                  <v-list-item-title>Upload JSON</v-list-item-title>
+                  <input type="file" @change="handleFileUpload" style="display: none" ref="fileInput">
+                </v-list-item>
+              </v-list>
+            </v-menu>
+            <v-btn
+              @click="removeNode"
+              :disabled="selectedNodes.length === 0"
+              icon
+            >
               <v-icon>mdi-minus</v-icon>
             </v-btn>
             <v-btn @click="clearGraph" icon>
               <v-icon>mdi-delete</v-icon>
             </v-btn>
-            <v-checkbox v-model="d3ForceEnabled" label="Auto Layout" hide-details dense></v-checkbox>
-            <!--- Add a button that copies the svg to the clipbaord as a png -->
-            <v-btn @click="copySvgToClipboardAsPng" color="primary" >
-              Copy to Clipboard
-              <v-icon>mdi-content-copy</v-icon>
-            </v-btn>
-            <v-btn @click="saveToSVG" color="primary" >
-              Save SVG
-              <v-icon>mdi-image</v-icon>
-            </v-btn>
-            <v-btn @click="exportGraphAsJson" color="primary" icon>
-              <v-icon>mdi-download</v-icon>
-            </v-btn>
-            <v-btn @click="uploadGraph" color="primary" icon>
-              <v-icon>mdi-upload</v-icon>
-            </v-btn>
-            <input type="file" @change="handleFileUpload" style="display: none" ref="fileInput">
+            <v-checkbox
+              v-model="d3ForceEnabled"
+              label="Auto Layout"
+              hide-details
+              dense
+            ></v-checkbox>
           </v-row>
           <!-- Row for the legend -->
           <v-row class="justify-space-between align-center">
@@ -180,26 +200,26 @@ watch(
 // Shared functionality to replace color variables in SVG
 const replaceColorInSVG = (svgElement) => {
   const computedStyle = getComputedStyle(document.documentElement);
-  
+
   const getColor = (colorVar) => {
     return `rgb(${computedStyle.getPropertyValue(colorVar).trim()})`;
   };
 
-  svgElement.querySelectorAll('[fill], [stroke], [color]').forEach(el => {
-    const fill = el.getAttribute('fill');
-    const stroke = el.getAttribute('stroke');
-    const color = el.getAttribute('color');
+  svgElement.querySelectorAll("[fill], [stroke], [color]").forEach((el) => {
+    const fill = el.getAttribute("fill");
+    const stroke = el.getAttribute("stroke");
+    const color = el.getAttribute("color");
 
-    if (color && color.includes('var(--v-theme-')) {
-      el.setAttribute('color', getColor(color.slice(8, -2)));
+    if (color && color.includes("var(--v-theme-")) {
+      el.setAttribute("color", getColor(color.slice(8, -2)));
     }
-    
-    if (fill && fill.includes('var(--v-theme-')) {
-      el.setAttribute('fill', getColor(fill.slice(8, -2)));
+
+    if (fill && fill.includes("var(--v-theme-")) {
+      el.setAttribute("fill", getColor(fill.slice(8, -2)));
     }
-    
-    if (stroke && stroke.includes('var(--v-theme-')) {
-      el.setAttribute('stroke', getColor(stroke.slice(8, -2)));
+
+    if (stroke && stroke.includes("var(--v-theme-")) {
+      el.setAttribute("stroke", getColor(stroke.slice(8, -2)));
     }
   });
 };
@@ -224,7 +244,9 @@ const saveToSVG = async () => {
   const serializedSvgText = serializer.serializeToString(svgElement);
 
   // Trigger download of the SVG
-  const url = URL.createObjectURL(new Blob([serializedSvgText], { type: "image/svg+xml" }));
+  const url = URL.createObjectURL(
+    new Blob([serializedSvgText], { type: "image/svg+xml" })
+  );
   const a = document.createElement("a");
   a.href = url;
   a.download = "network-graph.svg";
@@ -248,18 +270,21 @@ const copySvgToClipboardAsPng = async () => {
   replaceColorInSVG(svgElement);
 
   // Create a Blob from the updated SVG text
-  const svgBlob = new Blob([new XMLSerializer().serializeToString(svgElement)], { type: 'image/svg+xml;charset=utf-8' });
+  const svgBlob = new Blob(
+    [new XMLSerializer().serializeToString(svgElement)],
+    { type: "image/svg+xml;charset=utf-8" }
+  );
   const svgUrl = URL.createObjectURL(svgBlob);
 
   // Create an off-screen canvas and draw the SVG onto it
   const img = new Image();
   img.src = svgUrl;
-  
+
   img.onload = async () => {
-    const canvas = document.createElement('canvas');
+    const canvas = document.createElement("canvas");
     canvas.width = img.width;
     canvas.height = img.height;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
 
     // Draw the SVG image onto the canvas
     ctx.drawImage(img, 0, 0);
@@ -268,18 +293,17 @@ const copySvgToClipboardAsPng = async () => {
     canvas.toBlob(async (blob) => {
       try {
         await navigator.clipboard.write([
-          new ClipboardItem({ [blob.type]: blob })
+          new ClipboardItem({ [blob.type]: blob }),
         ]);
       } catch (err) {
-        console.error('Failed to copy: ', err);
+        console.error("Failed to copy: ", err);
       }
-    }, 'image/png');
+    }, "image/png");
 
     // Clean up
     URL.revokeObjectURL(svgUrl);
   };
 };
-
 
 const exportGraphAsJson = () => {
   const nodesJson = JSON.stringify(displayedNodes.value, null, 2);
@@ -293,6 +317,7 @@ const exportGraphAsJson = () => {
 };
 
 const uploadGraph = () => {
+  console.log("uploading graph");
   if (fileInput.value) fileInput.value.click();
 };
 
@@ -314,7 +339,6 @@ const handleFileUpload = (event) => {
   reader.readAsText(file);
   event.target.value = null;
 };
-
 
 onMounted(() => {
   const savedNodes = loadNodesFromLocalStorage();

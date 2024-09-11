@@ -32,21 +32,34 @@
               </template>
               <v-list>
                 <v-list-item @click="copySvgToClipboardAsPng">
-                  <v-icon left>mdi-content-copy</v-icon>
+                  <template v-slot:prepend>
+                    <v-icon left>mdi-content-copy</v-icon>
+                  </template>
                   <v-list-item-title>Copy to Clipboard</v-list-item-title>
                 </v-list-item>
                 <v-list-item @click="saveToSVG">
-                  <v-icon left>mdi-image</v-icon>
+                  <template v-slot:prepend>
+                    <v-icon left>mdi-image</v-icon>
+                  </template>
                   <v-list-item-title>Save SVG</v-list-item-title>
                 </v-list-item>
                 <v-list-item @click="exportGraphAsJson">
-                  <v-icon left>mdi-download</v-icon>
+                  <template v-slot:prepend>
+                    <v-icon left>mdi-download</v-icon>
+                  </template>
                   <v-list-item-title>Download JSON</v-list-item-title>
                 </v-list-item>
                 <v-list-item @click="uploadGraph">
-                  <v-icon left>mdi-upload</v-icon>
+                  <template v-slot:prepend>
+                    <v-icon left>mdi-upload</v-icon>
+                  </template>
                   <v-list-item-title>Upload JSON</v-list-item-title>
-                  <input type="file" @change="handleFileUpload" style="display: none" ref="fileInput">
+                  <input
+                    type="file"
+                    @change="handleFileUpload"
+                    style="display: none"
+                    ref="fileInput"
+                  />
                 </v-list-item>
               </v-list>
             </v-menu>

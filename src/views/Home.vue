@@ -15,9 +15,6 @@
   </v-container>
   <v-container>
     <v-window v-model="tab">
-      <!-- <v-window-item value="Tree">
-        <v-treeview :items="tree"></v-treeview>
-      </v-window-item> -->
       <v-window-item value="Network">
         <v-container>
           <RecipeGraph />

@@ -19,119 +19,124 @@
         </v-list>
       </v-col>
       <!-- Column for the graph and control panel -->
-      <v-col cols="9">
+      <v-col cols="9" class="d-flex flex-column">
         <!-- Container for the control panel -->
-        <v-container class="control-panel">
-          <v-row class="justify-space-between align-center">
-            <!-- Hamburger menu with options -->
-            <v-menu offset-y>
-              <template v-slot:activator="{ props }">
-                <v-btn icon v-bind="props">
-                  <v-icon>mdi-menu</v-icon>
-                </v-btn>
-              </template>
-              <v-list>
-                <v-list-item @click="copySvgToClipboardAsPng">
-                  <template v-slot:prepend>
-                    <v-icon left>mdi-content-copy</v-icon>
-                  </template>
-                  <v-list-item-title>Copy to Clipboard</v-list-item-title>
-                </v-list-item>
-                <v-list-item @click="saveToSVG">
-                  <template v-slot:prepend>
-                    <v-icon left>mdi-image</v-icon>
-                  </template>
-                  <v-list-item-title>Save SVG</v-list-item-title>
-                </v-list-item>
-                <v-list-item @click="exportGraphAsJson">
-                  <template v-slot:prepend>
-                    <v-icon left>mdi-download</v-icon>
-                  </template>
-                  <v-list-item-title>Download JSON</v-list-item-title>
-                </v-list-item>
-                <v-list-item @click="uploadGraph">
-                  <template v-slot:prepend>
-                    <v-icon left>mdi-upload</v-icon>
-                  </template>
-                  <v-list-item-title>Upload JSON</v-list-item-title>
-                  <input
-                    type="file"
-                    @change="handleFileUpload"
-                    style="display: none"
-                    ref="fileInput"
-                  />
-                </v-list-item>
-              </v-list>
-            </v-menu>
-            <v-btn
-              @click="removeNode"
-              :disabled="selectedNodes.length === 0"
-              icon
-            >
-              <v-icon>mdi-minus</v-icon>
-            </v-btn>
-            <v-btn @click="clearGraph" icon>
-              <v-icon>mdi-delete</v-icon>
-            </v-btn>
-            <v-checkbox
-              v-model="d3ForceEnabled"
-              label="Auto Layout"
-              hide-details
-              dense
-            ></v-checkbox>
-          </v-row>
-          <!-- Row for the legend -->
-          <v-row class="justify-space-between align-center">
-            <span>
-              Recipe
-              <v-icon class="legend-circle recipe-legend"></v-icon>
-            </span>
-            <span>
-              Item
-              <v-icon class="legend-circle item-legend"></v-icon>
-            </span>
-          </v-row>
-        </v-container>
+        <v-row class="justify-space-between align-center fixed-height">
+          <!-- Hamburger menu with options -->
+          <v-menu offset-y>
+            <template v-slot:activator="{ props }">
+              <v-btn icon v-bind="props">
+                <v-icon>mdi-menu</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item @click="copySvgToClipboardAsPng">
+                <template v-slot:prepend>
+                  <v-icon left>mdi-content-copy</v-icon>
+                </template>
+                <v-list-item-title>Copy to Clipboard</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="saveToSVG">
+                <template v-slot:prepend>
+                  <v-icon left>mdi-image</v-icon>
+                </template>
+                <v-list-item-title>Save SVG</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="exportGraphAsJson">
+                <template v-slot:prepend>
+                  <v-icon left>mdi-download</v-icon>
+                </template>
+                <v-list-item-title>Download JSON</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="uploadGraph">
+                <template v-slot:prepend>
+                  <v-icon left>mdi-upload</v-icon>
+                </template>
+                <v-list-item-title>Upload JSON</v-list-item-title>
+                <input
+                  type="file"
+                  @change="handleFileUpload"
+                  style="display: none"
+                  ref="fileInput"
+                />
+              </v-list-item>
+            </v-list>
+          </v-menu>
+          <v-btn
+            @click="removeNode"
+            :disabled="selectedNodes.length === 0"
+            icon
+          >
+            <v-icon>mdi-minus</v-icon>
+          </v-btn>
+          <v-btn @click="clearGraph" icon>
+            <v-icon>mdi-delete</v-icon>
+          </v-btn>
+          <v-btn
+            @click="expandNode"
+            :disabled="selectedNodes.length === 0"
+            icon
+          >
+            <v-icon>mdi-plus-box</v-icon>
+          </v-btn>
+          <v-checkbox
+            v-model="d3ForceEnabled"
+            label="Auto Layout"
+            hide-details
+            dense
+          ></v-checkbox>
+          <v-checkbox
+            v-model="configs.view.grid.visible"
+            label="Show Grid"
+            hide-details
+            dense
+          ></v-checkbox>
+        </v-row>
+        <!-- Row for the legend -->
+        <v-row class="justify-space-between align-center fixed-height">
+          <span>
+            Recipe
+            <v-icon class="legend-circle recipe-legend"></v-icon>
+          </span>
+          <span>
+            Item
+            <v-icon class="legend-circle item-legend"></v-icon>
+          </span>
+        </v-row>
         <!-- Network graph component -->
-        <v-network-graph
-          ref="graph"
-          v-model:selected-nodes="selectedNodes"
-          :nodes="displayedNodes"
-          :edges="edges"
-          :configs="configs"
-        >
-          <template #edge-label="{ edge, ...slotProps }">
-            <v-edge-label
-              :text="`${edge.amount}`"
-              align="center"
-              vertical-align="above"
-              v-bind="slotProps"
-            />
-          </template>
-          <!-- <template #edge-overlay="{ edge, scale, length, pointAtLength }">
-            <g
-              class="edge-icon"
-              :transform="`translate(${pointAtLength(0).x}, ${
-                pointAtLength(length).y
-              })`"
-            >
-              <foreignObject
-                :width="24 * scale"
-                :height="24 * scale"
-                x="-12"
-                y="-12"
-              >
-                <svg
-                  :width="24 * scale"
-                  :height="24 * scale"
-                  viewBox="0 0 24 24"
-                >
-                  <path :d="mdiLightningBolt" fill="gold" stroke="black" stroke-width="1" />
-                </svg>
-              </foreignObject>
-            </g>
-          </template> -->
-        </v-network-graph>
+        <v-row class="flex-grow-1">
+          <v-network-graph
+            ref="graph"
+            v-model:selected-nodes="selectedNodes"
+            :nodes="displayedNodes"
+            :edges="edges"
+            :configs="configs"
+          >
+            <template #edge-label="{ edge, ...slotProps }">
+              <v-edge-label
+                :text="`${edge.amount}`"
+                align="center"
+                vertical-align="above"
+                v-bind="slotProps"
+              />
+            </template>
+            <!-- <template #override-node="{ nodeId, scale, config, ...slotProps }">
+              <circle
+                :r="config.radius * scale"
+                :fill="config.color"
+                v-bind="slotProps"
+              />
+              <g class="edge-icon" :transform="getIconTransform(config, scale)">
+                <path
+                  :d="data.graph.nodes[nodeId].isRecipe ? mdiWidgets : mdiWrench"
+                  :fill="data.graph.nodes[nodeId].isRecipe ? 'green' : 'black'"
+                  stroke="black"
+                  stroke-width="1"
+                />
+              </g>
+            </template> -->
+          </v-network-graph>
+        </v-row>
       </v-col>
     </v-row>
   </v-container>
@@ -142,14 +147,13 @@ import { reactive, ref, computed, watch, onMounted } from "vue";
 import data from "../assets/data.json";
 import * as vNG from "v-network-graph";
 import { ForceLayout } from "v-network-graph/lib/force-layout";
-import { mdiLightningBolt } from "@mdi/js";
+import { mdiWidgets } from "@mdi/js";
+import { mdiWrench } from "@mdi/js";
 
 const graph = ref(null);
 const selectedNodes = ref([]);
 const search = ref("");
 
-const items = data.items;
-const resources = data.resources;
 const displayedNodes = ref({});
 const edges = data.graph.edges;
 const fileInput = ref(null);
@@ -183,6 +187,46 @@ const removeNode = () => {
       const updatedNodes = { ...displayedNodes.value };
       delete updatedNodes[nodeId];
       displayedNodes.value = updatedNodes;
+    }
+  });
+  selectedNodes.value = [];
+};
+
+// const expandNode = () => {
+//   selectedNodes.value.forEach((nodeId) => {
+//     const node = displayedNodes.value[nodeId];
+//     if (node && node.isRecipe) {
+//       node.ingredients.forEach((ingredient) => {
+//         if (!displayedNodes.value[ingredient.name]) {
+//           displayedNodes.value[ingredient.name] = {
+//             ...data.graph.nodes[ingredient.name],
+//           };
+//         }
+//       });
+//     }
+//   });
+//   selectedNodes.value = [];
+// };
+
+const expandNode = () => {
+  selectedNodes.value.forEach((nodeId) => {
+    let nodes = [];
+    let visited = new Set();
+    visited.add(nodeId);
+    for (let parent of data.tree[nodeId].parents) {
+      nodes.push(data.tree[parent]);
+    }
+    while (nodes.length > 0) {
+      let node = nodes.pop();
+      visited.add(node.id);
+      if (!displayedNodes.value[node.id] && data.graph.nodes[node.id]) {
+        displayedNodes.value[node.id] = { ...data.graph.nodes[node.id] };
+      }
+      for (let parent of data.tree[node.id].parents) {
+        if (!visited.has(parent)) {
+          nodes.push(data.tree[parent]);
+        }
+      }
     }
   });
   selectedNodes.value = [];
@@ -329,6 +373,21 @@ const exportGraphAsJson = () => {
   URL.revokeObjectURL(url);
 };
 
+const getIconTransform = (config, scale) => {
+  const iconSize = 24;
+  const radius = config.radius * scale;
+
+  // Calculate the translation needed to center the icon
+  const translateX = -iconSize / 2;
+  const translateY = -iconSize / 2;
+
+  const scaleFactor = scale;
+
+  return `translate(${translateX * scale}, ${
+    translateY * scale
+  }) scale(${scaleFactor})`;
+};
+
 const uploadGraph = () => {
   console.log("uploading graph");
   if (fileInput.value) fileInput.value.click();
@@ -390,12 +449,12 @@ const configs = reactive(
     view: {
       grid: {
         visible: true,
-        interval: 10,
+        interval: 50,
         thickIncrements: 5,
         line: {
           color: "rgb(var(--v-theme-primary))",
           width: 1,
-          dasharray: 1,
+          dasharray: 2,
         },
         thick: {
           color: "rgb(var(--v-theme-secondary))",
@@ -453,5 +512,16 @@ const configs = reactive(
 
 .item-legend {
   background-color: rgb(var(--v-theme-secondary-darken-1));
+}
+
+.v-ng-container {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 100%;
+}
+
+.fixed-height {
+  height: 50px; /* Adjust the height as needed */
+  flex-grow: 0;
 }
 </style>

@@ -7,3 +7,4 @@ Known bugs or things to do
   - Anything with the 'Buildable.' description
 - put a node on the graph
   - click and show all recipes that make it
+- FGBuildingDescriptor classes are not parsed

@@ -206,6 +206,9 @@ const expandNode = () => {
       if (!displayedNodes.value[node.id] && data.graph.nodes[node.id]) {
         displayedNodes.value[node.id] = { ...data.graph.nodes[node.id] };
       }
+      if (node.isResource) {
+        continue;
+      }
       for (let parent of data.tree[node.id].parents) {
         if (!visited.has(parent)) {
           nodes.push(data.tree[parent]);

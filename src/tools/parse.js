@@ -10,6 +10,7 @@ function make_tree(recipes, items, resources) {
       name: item.name,
       parents: [],
       children: [],
+      isResource: false,
     };
   }
   for (let resource of resources) {
@@ -18,6 +19,7 @@ function make_tree(recipes, items, resources) {
       name: resource.name,
       parents: [],
       children: [],
+      isResource: true,
     };
   }
 
@@ -27,6 +29,7 @@ function make_tree(recipes, items, resources) {
       name: recipe.name,
       parents: [],
       children: [],
+      isResource: false,
     };
     for (let product of recipe.products) {
       if (!nodes[product.name]) {
@@ -35,6 +38,7 @@ function make_tree(recipes, items, resources) {
           name: product.name,
           parents: [],
           children: [],
+          isResource: false,
         };
       }
       nodes[product.name].parents.push(recipe.name);
@@ -47,6 +51,7 @@ function make_tree(recipes, items, resources) {
           name: ingredient.name,
           parents: [],
           children: [],
+          isResource: false,
         };
       }
       nodes[ingredient.name].children.push(recipe.name);
@@ -250,7 +255,7 @@ const result = {
   recipes: recipes,
   items: items,
   resources: resources,
-  tree : { ...tree },
+  tree: { ...tree },
   graph: { ...graph },
 };
 

@@ -172,14 +172,22 @@ function parse_recipes(jsonData) {
     throw new Error("Recipe class not found");
   }
 
-  return targetObject.Classes.map((item) => ({
-    name: item.mDisplayName,
-    ingredients: parse_ingredients(item.mIngredients),
-    products: parse_ingredients(item.mProduct),
-    duration: item.mManufactoringDuration,
-    powerConsumptionConstant: item.mVariablePowerConsumptionConstant,
-    powerConsumptionFactor: item.mVariablePowerConsumptionFactor,
-  }));
+  //"mProducedIn": "(\"/Game/FactoryGame/Buildable/Factory/Packager/Build_Packager.Build_Packager_C\")",
+  // Ignore any recipes that are produced in the Packager
+
+  return targetObject.Classes.reduce((acc, item) => {
+    if (!item.mProducedIn.includes("Packager")) {
+      acc.push({
+        name: item.mDisplayName,
+        ingredients: parse_ingredients(item.mIngredients),
+        products: parse_ingredients(item.mProduct),
+        duration: item.mManufactoringDuration,
+        powerConsumptionConstant: item.mVariablePowerConsumptionConstant,
+        powerConsumptionFactor: item.mVariablePowerConsumptionFactor,
+      });
+    }
+    return acc;
+  }, []);
 }
 
 function parse_biomass(jsonData) {

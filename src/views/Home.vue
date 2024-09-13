@@ -5,12 +5,12 @@
       <v-tab color="onSecondaryContainer">
         Network <v-icon icon="mdi-graph-outline" color="info" size="24"></v-icon>
       </v-tab>
-      <v-tab color="onSecondaryContainer">
+      <!-- <v-tab color="onSecondaryContainer">
         Items <v-icon icon="mdi-package-variant-closed" color="info" size="24"></v-icon>
       </v-tab>
       <v-tab color="onSecondaryContainer">
         Resources <v-icon icon="mdi-cube-outline" color="info" size="24"></v-icon>
-      </v-tab>
+      </v-tab> -->
     </v-tabs>
   </v-container>
   <v-container>
@@ -20,7 +20,7 @@
           <RecipeGraph />
         </v-container>
       </v-window-item>
-      <v-window-item value="Items">
+      <!-- <v-window-item value="Items">
         <v-row>
           <v-col
             cols="12"
@@ -59,13 +59,12 @@
             </v-card>
           </v-col>
         </v-row>
-      </v-window-item>
+      </v-window-item> -->
     </v-window>
   </v-container>
 </template>
 
 <script>
-import data from "../assets/data.json";
 import RecipeGraph from '../components/RecipeGraph.vue'
 
 export default {
@@ -75,9 +74,6 @@ export default {
   data() {
     return {
       tab: "Network",
-      items: data.items,
-      resources: data.resources,
-      tree: data.tree,
     };
   },
 };

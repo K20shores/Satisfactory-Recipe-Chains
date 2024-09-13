@@ -192,22 +192,6 @@ const removeNode = () => {
   selectedNodes.value = [];
 };
 
-// const expandNode = () => {
-//   selectedNodes.value.forEach((nodeId) => {
-//     const node = displayedNodes.value[nodeId];
-//     if (node && node.isRecipe) {
-//       node.ingredients.forEach((ingredient) => {
-//         if (!displayedNodes.value[ingredient.name]) {
-//           displayedNodes.value[ingredient.name] = {
-//             ...data.graph.nodes[ingredient.name],
-//           };
-//         }
-//       });
-//     }
-//   });
-//   selectedNodes.value = [];
-// };
-
 const expandNode = () => {
   selectedNodes.value.forEach((nodeId) => {
     let nodes = [];

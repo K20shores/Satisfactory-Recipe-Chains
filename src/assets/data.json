@@ -1,699 +1,4 @@
 {
-  "items": [
-    {
-      "name": "Uranium Waste",
-      "className": "Desc_NuclearWaste_C",
-      "description": "The by-product of consuming Uranium Fuel Rods in the Nuclear Power Plant.\r\nNon-fissile Uranium can be extracted. Handle with caution.\r\n\r\nCaution: HIGHLY Radioactive.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "10.000000"
-    },
-    {
-      "name": "Plutonium Waste",
-      "className": "Desc_PlutoniumWaste_C",
-      "description": "The by-product of consuming Plutonium Fuel Rods in the Nuclear Power Plant.\r\nNeeds to be stored in a safe location. Handle with caution.\r\n\r\nCaution: EXTREMELY Radioactive.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "200.000000"
-    },
-    {
-      "name": "Battery",
-      "className": "Desc_Battery_C",
-      "description": "Primarily used as fuel for Drones and Vehicles.",
-      "energyValue": "6000.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Aluminum Ingot",
-      "className": "Desc_AluminumIngot_C",
-      "description": "Aluminum Ingots are made from Aluminum Scrap, which is refined from Alumina Solution.\r\nUsed to produce specialized aluminum-based parts.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Color Cartridge",
-      "className": "Desc_ColorCartridge_C",
-      "description": "Used for applying Patterns to structures with the Customizer.\r\n\r\n(Patterns can be purchased in the AWESOME Shop.)",
-      "energyValue": "900.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Cable",
-      "className": "Desc_Cable_C",
-      "description": "Used for crafting.\r\nPrimarily used to build power lines.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Concrete",
-      "className": "Desc_Cement_C",
-      "description": "Used for building.\r\nGood for stable foundations.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Modular Frame",
-      "className": "Desc_ModularFrame_C",
-      "description": "Used for crafting.\r\nMulti-purpose building block.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Steel Beam",
-      "className": "Desc_SteelPlate_C",
-      "description": "Steel Beams are used most often when constructing a little more advanced buildings.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Non-fissile Uranium",
-      "className": "Desc_NonFissibleUranium_C",
-      "description": "The isotope Uranium-238 is non-fissile, meaning it cannot be used for nuclear fission. It can, however, be converted into fissile Plutonium in the Particle Accelerator.\r\n\r\nCaution: Mildly Radioactive.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.750000"
-    },
-    {
-      "name": "Plutonium Pellet",
-      "className": "Desc_PlutoniumPellet_C",
-      "description": "Produced in the Particle Accelerator through conversion of Non-fissile Uranium.\r\nUsed to produce Encased Plutonium Cells for Plutonium Fuel Rods.\r\n\r\nPower Usage: 250-750 MW (500 MW average).\r\nCaution: Moderately Radioactive.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "20.000000"
-    },
-    {
-      "name": "Encased Plutonium Cell",
-      "className": "Desc_PlutoniumCell_C",
-      "description": "Plutonium Cells are concrete encased Plutonium Pellets.\r\nUsed to produce Plutonium Fuel Rods for Nuclear Power production.\r\n\r\nCaution: Moderately Radioactive.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "120.000000"
-    },
-    {
-      "name": "Silica",
-      "className": "Desc_Silica_C",
-      "description": "Derived from Raw Quartz. Commonly used to create glass structures, advanced refinement processes, and alternative production of electronics.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Iron Plate",
-      "className": "Desc_IronPlate_C",
-      "description": "Used for crafting.\r\nOne of the most basic parts.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Power Shard",
-      "className": "Desc_CrystalShard_C",
-      "description": "Mucus from the power slugs compressed into a solid crystal-like shard. \r\nIt radiates a strange power.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Iron Rod",
-      "className": "Desc_IronRod_C",
-      "description": "Used for crafting.\r\nOne of the most basic parts.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Wire",
-      "className": "Desc_Wire_C",
-      "description": "Used for crafting.\r\nOne of the most basic parts.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "HUB Parts",
-      "className": "Desc_HUBParts_C",
-      "description": "The parts required to build the basic structure of the HUB.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Iron Ingot",
-      "className": "Desc_IronIngot_C",
-      "description": "Used for crafting.\r\nCrafted into the most basic parts.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Reinforced Iron Plate",
-      "className": "Desc_IronPlateReinforced_C",
-      "description": "Used for crafting.\r\nA sturdier and more durable Iron Plate.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Rotor",
-      "className": "Desc_Rotor_C",
-      "description": "Used for crafting.\r\nThe moving parts of a motor.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Copper Sheet",
-      "className": "Desc_CopperSheet_C",
-      "description": "Used for crafting.\r\nPrimarily used for pipelines due to its high corrosion resistance.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Screw",
-      "className": "Desc_IronScrew_C",
-      "description": "Used for crafting.\r\nOne of the most basic parts.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Compacted Coal",
-      "className": "Desc_CompactedCoal_C",
-      "description": "A much more efficient alternative to Coal. Used as fuel for vehicles and coal generators.",
-      "energyValue": "630.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Heavy Oil Residue",
-      "className": "Desc_HeavyOilResidue_C",
-      "description": "A by-product of Plastic and Rubber production. Can be further refined into Fuel and Petroleum Coke.",
-      "energyValue": "0.400000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Turbofuel",
-      "className": "Desc_LiquidTurboFuel_C",
-      "description": "A more efficient alternative to Fuel. Can be used to generate power or packaged to be used as fuel for Vehicles.",
-      "energyValue": "2.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Empty Canister",
-      "className": "Desc_FluidCanister_C",
-      "description": "Used to package fluids for transportation.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Packaged Turbofuel",
-      "className": "Desc_TurboFuel_C",
-      "description": "Turbofuel, packaged for alternative transport. Can be used as fuel for Vehicles and the Jetpack.",
-      "energyValue": "2000.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Circuit Board",
-      "className": "Desc_CircuitBoard_C",
-      "description": "Circuit Boards are advanced electronics that are used in a plethora of different ways.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Plastic",
-      "className": "Desc_Plastic_C",
-      "description": "A versatile and easy to manufacture material that can be used for a lot of things.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Motor",
-      "className": "Desc_Motor_C",
-      "description": "The Motor creates a mechanical force that is used to move things from machines to vehicles.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Encased Industrial Beam",
-      "className": "Desc_SteelPlateReinforced_C",
-      "description": "Encased Industrial Beams utilizes the compressive strength of concrete and tensile strength of steel simultaneously.\r\nMostly used as a stable basis for constructing buildings.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Steel Pipe",
-      "className": "Desc_SteelPipe_C",
-      "description": "Steel Pipes are used most often when constructing a little more advanced buildings.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Rubber",
-      "className": "Desc_Rubber_C",
-      "description": "Rubber is a material that is very flexible and has a lot of friction.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Fuel",
-      "className": "Desc_LiquidFuel_C",
-      "description": "Fuel can be used to generate power or packaged to be used as fuel for Vehicles or the Jetpack.",
-      "energyValue": "0.750000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Polymer Resin",
-      "className": "Desc_PolymerResin_C",
-      "description": "Used for crafting.\r\nA by-product of oil refinement into fuel. Commonly used to manufacture plastics.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Petroleum Coke",
-      "className": "Desc_PetroleumCoke_C",
-      "description": "Used for crafting.\r\nA carbon-rich material distilled from Heavy Oil Residue. \r\nUsed as a less efficient coal replacement.",
-      "energyValue": "180.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Steel Ingot",
-      "className": "Desc_SteelIngot_C",
-      "description": "Steel Ingots are made from Iron Ore that's been smelted with Coal. They are made into several parts used in building construction.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Versatile Framework",
-      "className": "Desc_SpaceElevatorPart_2_C",
-      "description": "Project Part #2. Ship with the Space Elevator to complete phases of Project Assembly.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Heavy Modular Frame",
-      "className": "Desc_ModularFrameHeavy_C",
-      "description": "A more robust multi-purpose frame.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Packaged Fuel",
-      "className": "Desc_Fuel_C",
-      "description": "Fuel, packaged for alternative transport. Can be used as fuel for Vehicles and the Jetpack.",
-      "energyValue": "750.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Packaged Oil",
-      "className": "Desc_PackagedOil_C",
-      "description": "Crude Oil, packaged for alternative transport. Can be used as fuel for Vehicles.",
-      "energyValue": "320.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Packaged Heavy Oil Residue",
-      "className": "Desc_PackagedOilResidue_C",
-      "description": "Heavy Oil Residue, packaged for alternative transport. Can be used as fuel for Vehicles.",
-      "energyValue": "400.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Packaged Water",
-      "className": "Desc_PackagedWater_C",
-      "description": "Water, packaged for alternative transport.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Copper Ingot",
-      "className": "Desc_CopperIngot_C",
-      "description": "Used for crafting.\r\nCrafted into the most basic parts.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Quartz Crystal",
-      "className": "Desc_QuartzCrystal_C",
-      "description": "Derived from Raw Quartz. Used in the production of advanced radar technology and high-quality display screens.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Caterium Ingot",
-      "className": "Desc_GoldIngot_C",
-      "description": "Caterium Ingots are smelted from Caterium Ore. Caterium Ingots are mostly used for advanced electronics.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Aluminum Scrap",
-      "className": "Desc_AluminumScrap_C",
-      "description": "Aluminum Scrap is pure aluminum refined from Alumina. Can be smelted down to Aluminum Ingots for industrial usage.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Sulfuric Acid",
-      "className": "Desc_SulfuricAcid_C",
-      "description": "A mineral acid produced by combining Sulfur and Water in a complex reaction. Primarily used in refinement processes and Battery production.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Encased Uranium Cell",
-      "className": "Desc_UraniumCell_C",
-      "description": "Uranium Cells are produced from Uranium Ore. \r\nUsed to produce Uranium Fuel Rods for Nuclear Power production.\r\n\r\nCaution: Mildly Radioactive.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.500000"
-    },
-    {
-      "name": "Heat Sink",
-      "className": "Desc_AluminumPlateReinforced_C",
-      "description": "Used to dissipate heat faster.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Cooling System",
-      "className": "Desc_CoolingSystem_C",
-      "description": "Used to keep temperatures of advanced parts and buildings from exceeding to inefficient levels.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Nitric Acid",
-      "className": "Desc_NitricAcid_C",
-      "description": "Produced by reaction of Nitrogen Gas with Water. Its high corrosiveness and oxidizing properties make it an excellent choice for refinement and fuel production processes.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Aluminum Casing",
-      "className": "Desc_AluminumCasing_C",
-      "description": "A versatile container cast from Aluminum Ingots.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Radio Control Unit",
-      "className": "Desc_ModularFrameLightweight_C",
-      "description": "Enhances and directs radio signals.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Alclad Aluminum Sheet",
-      "className": "Desc_AluminumPlate_C",
-      "description": "Thin, lightweight, and highly durable sheets mainly used for products that require high heat conduction or a high specific strength.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Computer",
-      "className": "Desc_Computer_C",
-      "description": "A Computer is a complex logic machine that is used to control advanced behavior in machines.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Crystal Oscillator",
-      "className": "Desc_CrystalOscillator_C",
-      "description": "A crystal oscillator is an electronic oscillator circuit that uses the mechanical resonance of a vibrating crystal to create an electrical signal with a precise frequency.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Alumina Solution",
-      "className": "Desc_AluminaSolution_C",
-      "description": "Dissolved Alumina, extracted from Bauxite. Can be further refined into Aluminum Scrap for Aluminum Ingot production.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Smart Plating",
-      "className": "Desc_SpaceElevatorPart_1_C",
-      "description": "Project Part #1. Ship with the Space Elevator to complete phases of Project Assembly.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "High-Speed Connector",
-      "className": "Desc_HighSpeedConnector_C",
-      "description": "The high-speed connector connects several cables and wires in a very efficient way. Uses a standard pattern so its applications are many and varied.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Automated Wiring",
-      "className": "Desc_SpaceElevatorPart_3_C",
-      "description": "Project Part #3. Ship with the Space Elevator to complete phases of Project Assembly.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Stator",
-      "className": "Desc_Stator_C",
-      "description": "Used for crafting.\r\nThe static parts of a motor.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "AI Limiter",
-      "className": "Desc_CircuitBoardHighSpeed_C",
-      "description": "AI Limiters are super advanced electronics that are used to control AIs and keep them from evolving in malicious ways.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Quickwire",
-      "className": "Desc_HighSpeedWire_C",
-      "description": "Caterium's high conductivity and resistance to corrosion makes it ideal for small, advanced electronics.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Modular Engine",
-      "className": "Desc_SpaceElevatorPart_4_C",
-      "description": "Project Part #4. Ship with the Space Elevator to complete phases of Project Assembly.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Adaptive Control Unit",
-      "className": "Desc_SpaceElevatorPart_5_C",
-      "description": "Project Part #5. Ship with the Space Elevator to complete phases of Project Assembly.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Turbo Motor",
-      "className": "Desc_MotorLightweight_C",
-      "description": "The Turbo Motor is a more complex and more powerful version of the regular Motor.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Pressure Conversion Cube",
-      "className": "Desc_PressureConversionCube_C",
-      "description": "Converts outgoing force into internal pressure. Required to contain unstable, high-energy matter.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Fused Modular Frame",
-      "className": "Desc_ModularFrameFused_C",
-      "description": "A corrosion resistant, nitride hardened, highly robust, yet lightweight modular frame.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Supercomputer",
-      "className": "Desc_ComputerSuper_C",
-      "description": "The supercomputer is the next-gen version of the computer.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Electromagnetic Control Rod",
-      "className": "Desc_ElectromagneticControlRod_C",
-      "description": "Control Rods regulate power output via electromagnetism.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Copper Powder",
-      "className": "Desc_CopperDust_C",
-      "description": "Ground down Copper Ingots.\r\nThe high natural density of Copper, combined with the granularity of the powder, makes this part fit for producing Nuclear Pasta in the Particle Accelerator.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Empty Fluid Tank",
-      "className": "Desc_GasTank_C",
-      "description": "Used to package gases and volatile liquids for transportation.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Nuclear Pasta",
-      "className": "Desc_SpaceElevatorPart_9_C",
-      "description": "Project Part #9. Ship with the Space Elevator to complete phases of Project Assembly.\r\nPower Usage: 500-1500 MW (1000 MW average).\r\n\r\nNuclear Pasta is extremely dense degenerate matter, formed when extreme pressure forces protons and electrons together into neutrons. It is theorized to exist naturally within the crust of neutron stars.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Assembly Director System",
-      "className": "Desc_SpaceElevatorPart_7_C",
-      "description": "Project Part #6. Ship with the Space Elevator to complete phases of Project Assembly.\r\n\r\nThis extremely fast and precise computing system is specifically designed to direct the Project Assembly: Assembly Phase.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Magnetic Field Generator",
-      "className": "Desc_SpaceElevatorPart_6_C",
-      "description": "Project Part #7. Ship with the Space Elevator to complete phases of Project Assembly.\r\n\r\nThese modular generators use superconducting magnets and vast amounts of electricity to produce an easily expandable and powerful magnetic field.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Thermal Propulsion Rocket",
-      "className": "Desc_SpaceElevatorPart_8_C",
-      "description": "Project Part #8. Ship with the Space Elevator to complete phases of Project Assembly.\r\n\r\nUses extreme heat to produce the high-pressure plasma required to get Project Assembly into motion.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Black Powder",
-      "className": "Desc_Gunpowder_C",
-      "description": "An explosive powder that is commonly used to produce simple explosives.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Gas Filter",
-      "className": "Desc_Filter_C",
-      "description": "Used in the Gas Mask to filter out toxins and pollutants from the air.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Iodine Infused Filter",
-      "className": "Desc_HazmatFilter_C",
-      "description": "Used in the Hazmat Suit to absorb radioactive particles.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Alien Protein",
-      "className": "Desc_AlienProtein_C",
-      "description": "Ground down Alien Remains in a neat little package.\r\nUsed for medical purposes and to research alien organisms.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Alien DNA Capsule",
-      "className": "Desc_AlienDNACapsule_C",
-      "description": "This data capsule translates organic chemicals into readable alien genetics information.\r\nUsed for researching alien organisms.\r\n\r\nGo the extra kilometer! Knowledge is power, and power is just efficiency with fewer steps. Depositing Alien DNA Capsules in the AWESOME Sink provides FICSIT with knowledge, and Pioneers with Coupons.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Purple Power Slug",
-      "className": "Desc_Crystal_mk3_C",
-      "description": "A strange slug radiating a powerful strange power.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Yellow Power Slug",
-      "className": "Desc_Crystal_mk2_C",
-      "description": "A strange slug radiating a strange power.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Blue Power Slug",
-      "className": "Desc_Crystal_C",
-      "description": "A strange slug radiating a weak strange power.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Smokeless Powder",
-      "className": "Desc_GunpowderMK2_C",
-      "description": "An explosive powder that is commonly used to produce modern firearms.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "FICSMAS Wonder Star",
-      "className": "Desc_XmasStar_C",
-      "description": "This special FICSMAS Star signifies the productivity of FICSIT all across the universe. It also signifies the fact that you have nearly completed the Holiday Event, so it's time to get back to work.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "FICSMAS Ornament Bundle",
-      "className": "Desc_XmasBallCluster_C",
-      "description": "All the FICSMAS Ornaments smashed together to make even more FICSMAS Decorations!",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "FICSMAS Decoration",
-      "className": "Desc_XmasWreath_C",
-      "description": "A decoration used to make decorations. Its use cases are questionable.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Candy Cane",
-      "className": "Desc_CandyCane_C",
-      "description": "A delicious Candy Cane to be enjoyed during the FICSMAS Holidays. \r\n*Disclaimer: Can't be consumed...",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Actual Snow",
-      "className": "Desc_Snow_C",
-      "description": "It's snow. Not the nice, thick, crunchy kind though... more the disgustingly wet, slushy kind... Guess we can make stuff from it.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "FICSMAS Bow",
-      "className": "Desc_XmasBow_C",
-      "description": "A fancy Bow, maybe someone can wear this? You certainly can't! Probably, some parts and decorations can be made from this.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Copper FICSMAS Ornament",
-      "className": "Desc_XmasBall3_C",
-      "description": "Still used for making FICSMAS Decorations.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Iron FICSMAS Ornament",
-      "className": "Desc_XmasBall4_C",
-      "description": "This super special... nope... still just used for making FICSMAS Decorations.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "FICSMAS Tree Branch",
-      "className": "Desc_XmasBranch_C",
-      "description": "A special Tree Branch used to produce parts and buildings during the FICSMAS Event.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Red FICSMAS Ornament",
-      "className": "Desc_XmasBall1_C",
-      "description": "Used for making FICSMAS Decorations.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "Blue FICSMAS Ornament",
-      "className": "Desc_XmasBall2_C",
-      "description": "Again, used for making FICSMAS Decorations.",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    },
-    {
-      "name": "FICSMAS Gift",
-      "className": "Desc_Gift_C",
-      "description": "Special FICSMAS buildings and parts can be obtained and produced from this FICSIT Holiday present.\r\n\r\n*Watch the sky for deliveries from orbit!",
-      "energyValue": "0.000000",
-      "radioactiveDecay": "0.000000"
-    }
-  ],
   "recipes": [
     {
       "name": "Blueprint Designer",
@@ -16234,6 +15539,701 @@
       "duration": "24.000000",
       "powerConsumptionConstant": "0.000000",
       "powerConsumptionFactor": "1.000000"
+    }
+  ],
+  "items": [
+    {
+      "name": "Uranium Waste",
+      "className": "Desc_NuclearWaste_C",
+      "description": "The by-product of consuming Uranium Fuel Rods in the Nuclear Power Plant.\r\nNon-fissile Uranium can be extracted. Handle with caution.\r\n\r\nCaution: HIGHLY Radioactive.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "10.000000"
+    },
+    {
+      "name": "Plutonium Waste",
+      "className": "Desc_PlutoniumWaste_C",
+      "description": "The by-product of consuming Plutonium Fuel Rods in the Nuclear Power Plant.\r\nNeeds to be stored in a safe location. Handle with caution.\r\n\r\nCaution: EXTREMELY Radioactive.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "200.000000"
+    },
+    {
+      "name": "Battery",
+      "className": "Desc_Battery_C",
+      "description": "Primarily used as fuel for Drones and Vehicles.",
+      "energyValue": "6000.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Aluminum Ingot",
+      "className": "Desc_AluminumIngot_C",
+      "description": "Aluminum Ingots are made from Aluminum Scrap, which is refined from Alumina Solution.\r\nUsed to produce specialized aluminum-based parts.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Color Cartridge",
+      "className": "Desc_ColorCartridge_C",
+      "description": "Used for applying Patterns to structures with the Customizer.\r\n\r\n(Patterns can be purchased in the AWESOME Shop.)",
+      "energyValue": "900.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Cable",
+      "className": "Desc_Cable_C",
+      "description": "Used for crafting.\r\nPrimarily used to build power lines.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Concrete",
+      "className": "Desc_Cement_C",
+      "description": "Used for building.\r\nGood for stable foundations.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Modular Frame",
+      "className": "Desc_ModularFrame_C",
+      "description": "Used for crafting.\r\nMulti-purpose building block.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Steel Beam",
+      "className": "Desc_SteelPlate_C",
+      "description": "Steel Beams are used most often when constructing a little more advanced buildings.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Non-fissile Uranium",
+      "className": "Desc_NonFissibleUranium_C",
+      "description": "The isotope Uranium-238 is non-fissile, meaning it cannot be used for nuclear fission. It can, however, be converted into fissile Plutonium in the Particle Accelerator.\r\n\r\nCaution: Mildly Radioactive.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.750000"
+    },
+    {
+      "name": "Plutonium Pellet",
+      "className": "Desc_PlutoniumPellet_C",
+      "description": "Produced in the Particle Accelerator through conversion of Non-fissile Uranium.\r\nUsed to produce Encased Plutonium Cells for Plutonium Fuel Rods.\r\n\r\nPower Usage: 250-750 MW (500 MW average).\r\nCaution: Moderately Radioactive.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "20.000000"
+    },
+    {
+      "name": "Encased Plutonium Cell",
+      "className": "Desc_PlutoniumCell_C",
+      "description": "Plutonium Cells are concrete encased Plutonium Pellets.\r\nUsed to produce Plutonium Fuel Rods for Nuclear Power production.\r\n\r\nCaution: Moderately Radioactive.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "120.000000"
+    },
+    {
+      "name": "Silica",
+      "className": "Desc_Silica_C",
+      "description": "Derived from Raw Quartz. Commonly used to create glass structures, advanced refinement processes, and alternative production of electronics.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Iron Plate",
+      "className": "Desc_IronPlate_C",
+      "description": "Used for crafting.\r\nOne of the most basic parts.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Power Shard",
+      "className": "Desc_CrystalShard_C",
+      "description": "Mucus from the power slugs compressed into a solid crystal-like shard. \r\nIt radiates a strange power.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Iron Rod",
+      "className": "Desc_IronRod_C",
+      "description": "Used for crafting.\r\nOne of the most basic parts.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Wire",
+      "className": "Desc_Wire_C",
+      "description": "Used for crafting.\r\nOne of the most basic parts.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "HUB Parts",
+      "className": "Desc_HUBParts_C",
+      "description": "The parts required to build the basic structure of the HUB.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Iron Ingot",
+      "className": "Desc_IronIngot_C",
+      "description": "Used for crafting.\r\nCrafted into the most basic parts.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Reinforced Iron Plate",
+      "className": "Desc_IronPlateReinforced_C",
+      "description": "Used for crafting.\r\nA sturdier and more durable Iron Plate.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Rotor",
+      "className": "Desc_Rotor_C",
+      "description": "Used for crafting.\r\nThe moving parts of a motor.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Copper Sheet",
+      "className": "Desc_CopperSheet_C",
+      "description": "Used for crafting.\r\nPrimarily used for pipelines due to its high corrosion resistance.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Screw",
+      "className": "Desc_IronScrew_C",
+      "description": "Used for crafting.\r\nOne of the most basic parts.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Compacted Coal",
+      "className": "Desc_CompactedCoal_C",
+      "description": "A much more efficient alternative to Coal. Used as fuel for vehicles and coal generators.",
+      "energyValue": "630.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Heavy Oil Residue",
+      "className": "Desc_HeavyOilResidue_C",
+      "description": "A by-product of Plastic and Rubber production. Can be further refined into Fuel and Petroleum Coke.",
+      "energyValue": "0.400000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Turbofuel",
+      "className": "Desc_LiquidTurboFuel_C",
+      "description": "A more efficient alternative to Fuel. Can be used to generate power or packaged to be used as fuel for Vehicles.",
+      "energyValue": "2.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Empty Canister",
+      "className": "Desc_FluidCanister_C",
+      "description": "Used to package fluids for transportation.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Packaged Turbofuel",
+      "className": "Desc_TurboFuel_C",
+      "description": "Turbofuel, packaged for alternative transport. Can be used as fuel for Vehicles and the Jetpack.",
+      "energyValue": "2000.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Circuit Board",
+      "className": "Desc_CircuitBoard_C",
+      "description": "Circuit Boards are advanced electronics that are used in a plethora of different ways.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Plastic",
+      "className": "Desc_Plastic_C",
+      "description": "A versatile and easy to manufacture material that can be used for a lot of things.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Motor",
+      "className": "Desc_Motor_C",
+      "description": "The Motor creates a mechanical force that is used to move things from machines to vehicles.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Encased Industrial Beam",
+      "className": "Desc_SteelPlateReinforced_C",
+      "description": "Encased Industrial Beams utilizes the compressive strength of concrete and tensile strength of steel simultaneously.\r\nMostly used as a stable basis for constructing buildings.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Steel Pipe",
+      "className": "Desc_SteelPipe_C",
+      "description": "Steel Pipes are used most often when constructing a little more advanced buildings.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Rubber",
+      "className": "Desc_Rubber_C",
+      "description": "Rubber is a material that is very flexible and has a lot of friction.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Fuel",
+      "className": "Desc_LiquidFuel_C",
+      "description": "Fuel can be used to generate power or packaged to be used as fuel for Vehicles or the Jetpack.",
+      "energyValue": "0.750000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Polymer Resin",
+      "className": "Desc_PolymerResin_C",
+      "description": "Used for crafting.\r\nA by-product of oil refinement into fuel. Commonly used to manufacture plastics.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Petroleum Coke",
+      "className": "Desc_PetroleumCoke_C",
+      "description": "Used for crafting.\r\nA carbon-rich material distilled from Heavy Oil Residue. \r\nUsed as a less efficient coal replacement.",
+      "energyValue": "180.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Steel Ingot",
+      "className": "Desc_SteelIngot_C",
+      "description": "Steel Ingots are made from Iron Ore that's been smelted with Coal. They are made into several parts used in building construction.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Versatile Framework",
+      "className": "Desc_SpaceElevatorPart_2_C",
+      "description": "Project Part #2. Ship with the Space Elevator to complete phases of Project Assembly.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Heavy Modular Frame",
+      "className": "Desc_ModularFrameHeavy_C",
+      "description": "A more robust multi-purpose frame.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Packaged Fuel",
+      "className": "Desc_Fuel_C",
+      "description": "Fuel, packaged for alternative transport. Can be used as fuel for Vehicles and the Jetpack.",
+      "energyValue": "750.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Packaged Oil",
+      "className": "Desc_PackagedOil_C",
+      "description": "Crude Oil, packaged for alternative transport. Can be used as fuel for Vehicles.",
+      "energyValue": "320.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Packaged Heavy Oil Residue",
+      "className": "Desc_PackagedOilResidue_C",
+      "description": "Heavy Oil Residue, packaged for alternative transport. Can be used as fuel for Vehicles.",
+      "energyValue": "400.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Packaged Water",
+      "className": "Desc_PackagedWater_C",
+      "description": "Water, packaged for alternative transport.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Copper Ingot",
+      "className": "Desc_CopperIngot_C",
+      "description": "Used for crafting.\r\nCrafted into the most basic parts.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Quartz Crystal",
+      "className": "Desc_QuartzCrystal_C",
+      "description": "Derived from Raw Quartz. Used in the production of advanced radar technology and high-quality display screens.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Caterium Ingot",
+      "className": "Desc_GoldIngot_C",
+      "description": "Caterium Ingots are smelted from Caterium Ore. Caterium Ingots are mostly used for advanced electronics.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Aluminum Scrap",
+      "className": "Desc_AluminumScrap_C",
+      "description": "Aluminum Scrap is pure aluminum refined from Alumina. Can be smelted down to Aluminum Ingots for industrial usage.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Sulfuric Acid",
+      "className": "Desc_SulfuricAcid_C",
+      "description": "A mineral acid produced by combining Sulfur and Water in a complex reaction. Primarily used in refinement processes and Battery production.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Encased Uranium Cell",
+      "className": "Desc_UraniumCell_C",
+      "description": "Uranium Cells are produced from Uranium Ore. \r\nUsed to produce Uranium Fuel Rods for Nuclear Power production.\r\n\r\nCaution: Mildly Radioactive.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.500000"
+    },
+    {
+      "name": "Heat Sink",
+      "className": "Desc_AluminumPlateReinforced_C",
+      "description": "Used to dissipate heat faster.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Cooling System",
+      "className": "Desc_CoolingSystem_C",
+      "description": "Used to keep temperatures of advanced parts and buildings from exceeding to inefficient levels.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Nitric Acid",
+      "className": "Desc_NitricAcid_C",
+      "description": "Produced by reaction of Nitrogen Gas with Water. Its high corrosiveness and oxidizing properties make it an excellent choice for refinement and fuel production processes.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Aluminum Casing",
+      "className": "Desc_AluminumCasing_C",
+      "description": "A versatile container cast from Aluminum Ingots.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Radio Control Unit",
+      "className": "Desc_ModularFrameLightweight_C",
+      "description": "Enhances and directs radio signals.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Alclad Aluminum Sheet",
+      "className": "Desc_AluminumPlate_C",
+      "description": "Thin, lightweight, and highly durable sheets mainly used for products that require high heat conduction or a high specific strength.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Computer",
+      "className": "Desc_Computer_C",
+      "description": "A Computer is a complex logic machine that is used to control advanced behavior in machines.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Crystal Oscillator",
+      "className": "Desc_CrystalOscillator_C",
+      "description": "A crystal oscillator is an electronic oscillator circuit that uses the mechanical resonance of a vibrating crystal to create an electrical signal with a precise frequency.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Alumina Solution",
+      "className": "Desc_AluminaSolution_C",
+      "description": "Dissolved Alumina, extracted from Bauxite. Can be further refined into Aluminum Scrap for Aluminum Ingot production.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Smart Plating",
+      "className": "Desc_SpaceElevatorPart_1_C",
+      "description": "Project Part #1. Ship with the Space Elevator to complete phases of Project Assembly.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "High-Speed Connector",
+      "className": "Desc_HighSpeedConnector_C",
+      "description": "The high-speed connector connects several cables and wires in a very efficient way. Uses a standard pattern so its applications are many and varied.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Automated Wiring",
+      "className": "Desc_SpaceElevatorPart_3_C",
+      "description": "Project Part #3. Ship with the Space Elevator to complete phases of Project Assembly.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Stator",
+      "className": "Desc_Stator_C",
+      "description": "Used for crafting.\r\nThe static parts of a motor.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "AI Limiter",
+      "className": "Desc_CircuitBoardHighSpeed_C",
+      "description": "AI Limiters are super advanced electronics that are used to control AIs and keep them from evolving in malicious ways.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Quickwire",
+      "className": "Desc_HighSpeedWire_C",
+      "description": "Caterium's high conductivity and resistance to corrosion makes it ideal for small, advanced electronics.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Modular Engine",
+      "className": "Desc_SpaceElevatorPart_4_C",
+      "description": "Project Part #4. Ship with the Space Elevator to complete phases of Project Assembly.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Adaptive Control Unit",
+      "className": "Desc_SpaceElevatorPart_5_C",
+      "description": "Project Part #5. Ship with the Space Elevator to complete phases of Project Assembly.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Turbo Motor",
+      "className": "Desc_MotorLightweight_C",
+      "description": "The Turbo Motor is a more complex and more powerful version of the regular Motor.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Pressure Conversion Cube",
+      "className": "Desc_PressureConversionCube_C",
+      "description": "Converts outgoing force into internal pressure. Required to contain unstable, high-energy matter.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Fused Modular Frame",
+      "className": "Desc_ModularFrameFused_C",
+      "description": "A corrosion resistant, nitride hardened, highly robust, yet lightweight modular frame.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Supercomputer",
+      "className": "Desc_ComputerSuper_C",
+      "description": "The supercomputer is the next-gen version of the computer.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Electromagnetic Control Rod",
+      "className": "Desc_ElectromagneticControlRod_C",
+      "description": "Control Rods regulate power output via electromagnetism.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Copper Powder",
+      "className": "Desc_CopperDust_C",
+      "description": "Ground down Copper Ingots.\r\nThe high natural density of Copper, combined with the granularity of the powder, makes this part fit for producing Nuclear Pasta in the Particle Accelerator.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Empty Fluid Tank",
+      "className": "Desc_GasTank_C",
+      "description": "Used to package gases and volatile liquids for transportation.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Nuclear Pasta",
+      "className": "Desc_SpaceElevatorPart_9_C",
+      "description": "Project Part #9. Ship with the Space Elevator to complete phases of Project Assembly.\r\nPower Usage: 500-1500 MW (1000 MW average).\r\n\r\nNuclear Pasta is extremely dense degenerate matter, formed when extreme pressure forces protons and electrons together into neutrons. It is theorized to exist naturally within the crust of neutron stars.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Assembly Director System",
+      "className": "Desc_SpaceElevatorPart_7_C",
+      "description": "Project Part #6. Ship with the Space Elevator to complete phases of Project Assembly.\r\n\r\nThis extremely fast and precise computing system is specifically designed to direct the Project Assembly: Assembly Phase.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Magnetic Field Generator",
+      "className": "Desc_SpaceElevatorPart_6_C",
+      "description": "Project Part #7. Ship with the Space Elevator to complete phases of Project Assembly.\r\n\r\nThese modular generators use superconducting magnets and vast amounts of electricity to produce an easily expandable and powerful magnetic field.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Thermal Propulsion Rocket",
+      "className": "Desc_SpaceElevatorPart_8_C",
+      "description": "Project Part #8. Ship with the Space Elevator to complete phases of Project Assembly.\r\n\r\nUses extreme heat to produce the high-pressure plasma required to get Project Assembly into motion.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Black Powder",
+      "className": "Desc_Gunpowder_C",
+      "description": "An explosive powder that is commonly used to produce simple explosives.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Gas Filter",
+      "className": "Desc_Filter_C",
+      "description": "Used in the Gas Mask to filter out toxins and pollutants from the air.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Iodine Infused Filter",
+      "className": "Desc_HazmatFilter_C",
+      "description": "Used in the Hazmat Suit to absorb radioactive particles.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Alien Protein",
+      "className": "Desc_AlienProtein_C",
+      "description": "Ground down Alien Remains in a neat little package.\r\nUsed for medical purposes and to research alien organisms.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Alien DNA Capsule",
+      "className": "Desc_AlienDNACapsule_C",
+      "description": "This data capsule translates organic chemicals into readable alien genetics information.\r\nUsed for researching alien organisms.\r\n\r\nGo the extra kilometer! Knowledge is power, and power is just efficiency with fewer steps. Depositing Alien DNA Capsules in the AWESOME Sink provides FICSIT with knowledge, and Pioneers with Coupons.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Purple Power Slug",
+      "className": "Desc_Crystal_mk3_C",
+      "description": "A strange slug radiating a powerful strange power.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Yellow Power Slug",
+      "className": "Desc_Crystal_mk2_C",
+      "description": "A strange slug radiating a strange power.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Blue Power Slug",
+      "className": "Desc_Crystal_C",
+      "description": "A strange slug radiating a weak strange power.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Smokeless Powder",
+      "className": "Desc_GunpowderMK2_C",
+      "description": "An explosive powder that is commonly used to produce modern firearms.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "FICSMAS Wonder Star",
+      "className": "Desc_XmasStar_C",
+      "description": "This special FICSMAS Star signifies the productivity of FICSIT all across the universe. It also signifies the fact that you have nearly completed the Holiday Event, so it's time to get back to work.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "FICSMAS Ornament Bundle",
+      "className": "Desc_XmasBallCluster_C",
+      "description": "All the FICSMAS Ornaments smashed together to make even more FICSMAS Decorations!",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "FICSMAS Decoration",
+      "className": "Desc_XmasWreath_C",
+      "description": "A decoration used to make decorations. Its use cases are questionable.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Candy Cane",
+      "className": "Desc_CandyCane_C",
+      "description": "A delicious Candy Cane to be enjoyed during the FICSMAS Holidays. \r\n*Disclaimer: Can't be consumed...",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Actual Snow",
+      "className": "Desc_Snow_C",
+      "description": "It's snow. Not the nice, thick, crunchy kind though... more the disgustingly wet, slushy kind... Guess we can make stuff from it.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "FICSMAS Bow",
+      "className": "Desc_XmasBow_C",
+      "description": "A fancy Bow, maybe someone can wear this? You certainly can't! Probably, some parts and decorations can be made from this.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Copper FICSMAS Ornament",
+      "className": "Desc_XmasBall3_C",
+      "description": "Still used for making FICSMAS Decorations.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Iron FICSMAS Ornament",
+      "className": "Desc_XmasBall4_C",
+      "description": "This super special... nope... still just used for making FICSMAS Decorations.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "FICSMAS Tree Branch",
+      "className": "Desc_XmasBranch_C",
+      "description": "A special Tree Branch used to produce parts and buildings during the FICSMAS Event.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Red FICSMAS Ornament",
+      "className": "Desc_XmasBall1_C",
+      "description": "Used for making FICSMAS Decorations.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "Blue FICSMAS Ornament",
+      "className": "Desc_XmasBall2_C",
+      "description": "Again, used for making FICSMAS Decorations.",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
+    },
+    {
+      "name": "FICSMAS Gift",
+      "className": "Desc_Gift_C",
+      "description": "Special FICSMAS buildings and parts can be obtained and produced from this FICSIT Holiday present.\r\n\r\n*Watch the sky for deliveries from orbit!",
+      "energyValue": "0.000000",
+      "radioactiveDecay": "0.000000"
     }
   ],
   "resources": [
@@ -41339,6 +41339,91 @@
         "name": "Bauxite",
         "isRecipe": false,
         "isResource": true
+      },
+      "Desc_FlowerPetals_C": {
+        "name": "Flower Petals",
+        "isRecipe": false,
+        "isResource": false
+      },
+      "Desc_Wood_C": {
+        "name": "Wood",
+        "isRecipe": false,
+        "isResource": false
+      },
+      "Desc_GenericBiomass_C": {
+        "name": "Biomass",
+        "isRecipe": false,
+        "isResource": false
+      },
+      "Desc_Biofuel_C": {
+        "name": "Solid Biofuel",
+        "isRecipe": false,
+        "isResource": false
+      },
+      "Desc_LiquidBiofuel_C": {
+        "name": "Liquid Biofuel",
+        "isRecipe": false,
+        "isResource": false
+      },
+      "Desc_PackagedBiofuel_C": {
+        "name": "Packaged Liquid Biofuel",
+        "isRecipe": false,
+        "isResource": false
+      },
+      "Desc_PackagedAlumina_C": {
+        "name": "Packaged Alumina Solution",
+        "isRecipe": false,
+        "isResource": false
+      },
+      "Desc_PackagedNitrogenGas_C": {
+        "name": "Packaged Nitrogen Gas",
+        "isRecipe": false,
+        "isResource": false
+      },
+      "Desc_PackagedNitricAcid_C": {
+        "name": "Packaged Nitric Acid",
+        "isRecipe": false,
+        "isResource": false
+      },
+      "Desc_PackagedSulfuricAcid_C": {
+        "name": "Packaged Sulfuric Acid",
+        "isRecipe": false,
+        "isResource": false
+      },
+      "Desc_Fabric_C": {
+        "name": "Fabric",
+        "isRecipe": false,
+        "isResource": false
+      },
+      "Desc_StingerParts_C": {
+        "name": "Stinger Remains",
+        "isRecipe": false,
+        "isResource": false
+      },
+      "Desc_SpitterParts_C": {
+        "name": "Plasma Spitter Remains",
+        "isRecipe": false,
+        "isResource": false
+      },
+      "Desc_HogParts_C": {
+        "name": "Hog Remains",
+        "isRecipe": false,
+        "isResource": false
+      },
+      "Desc_HatcherParts_C": {
+        "name": "Hatcher Remains",
+        "isRecipe": false,
+        "isResource": false
+      },
+      "Desc_Mycelia_C": {
+        "name": "Mycelia",
+        "isRecipe": false,
+        "isResource": false
+      },
+      "Desc_Leaves_C": {
+        "name": "Leaves",
+        "isRecipe": false,
+        "isResource": false
       }
     },
     "edges": {

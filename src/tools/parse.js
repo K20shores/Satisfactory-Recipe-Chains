@@ -57,7 +57,7 @@ function make_tree(recipes, items, resources) {
   return nodes;
 }
 
-function make_graph(items, recipes, resources) {
+function make_graph(recipes, items, resources, biomass) {
   let nodes = {};
   let edges = {};
   let edgeCounter = 1;
@@ -102,6 +102,14 @@ function make_graph(items, recipes, resources) {
       name: resource.name,
       isRecipe: false,
       isResource: true,
+    };
+  }
+
+  for (let item of biomass) {
+    nodes[item.className] = {
+      name: item.name,
+      isRecipe: false,
+      isResource: false,
     };
   }
 
@@ -169,6 +177,26 @@ function parse_recipes(jsonData) {
   }));
 }
 
+function parse_biomass(jsonData) {
+  const biomass_native_class =
+    "/Script/CoreUObject.Class'/Script/FactoryGame.FGItemDescriptorBiomass'";
+  const targetObject = jsonData.find(
+    (item) => item.NativeClass === biomass_native_class
+  );
+
+  if (!targetObject) {
+    throw new Error("Biomass class not found");
+  }
+
+  return targetObject.Classes.map((item) => ({
+    name: item.mDisplayName,
+    className: item.ClassName,
+    description: item.mDescription,
+    energyValue: item.mEnergyValue,
+    radioactiveDecay: item.mRadioactiveDecay,
+  }));
+}
+
 function parse_resources(jsonData) {
   const recipe_native_class =
     "/Script/CoreUObject.Class'/Script/FactoryGame.FGResourceDescriptor'";
@@ -212,14 +240,15 @@ const jsonData = JSON.parse(data);
 
 const items = parse_items(jsonData);
 const recipes = parse_recipes(jsonData);
+const biomass = parse_biomass(jsonData);
 const resources = parse_resources(jsonData);
 
-const tree = make_tree(recipes, items, resources);
-const graph = make_graph(items, recipes, resources);
+const tree = make_tree(recipes, items, resources, biomass);
+const graph = make_graph(recipes, items, resources, biomass);
 
 const result = {
-  items: items,
   recipes: recipes,
+  items: items,
   resources: resources,
   tree : { ...tree },
   graph: { ...graph },

@@ -11,6 +11,7 @@ function make_tree(recipes, items, resources) {
       parents: [],
       children: [],
       isResource: false,
+      isRecipe: false,
     };
   }
   for (let resource of resources) {
@@ -20,6 +21,7 @@ function make_tree(recipes, items, resources) {
       parents: [],
       children: [],
       isResource: true,
+      isRecipe: false,
     };
   }
 

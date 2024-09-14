@@ -195,22 +195,36 @@ const removeNode = () => {
 const expandNode = () => {
   selectedNodes.value.forEach((nodeId) => {
     let nodes = [];
-    let visited = new Set();
-    visited.add(nodeId);
-    for (let parent of data.tree[nodeId].parents) {
+
+    const addByproducts = (node) => {
+      if (node.isRecipe) {
+        for (let child of node.children) {
+          let childNode = data.tree[child];
+          displayedNodes.value[childNode.id] = { ...data.graph.nodes[childNode.id] };
+        }
+      }
+    };
+
+    let node = data.tree[nodeId];
+
+    // always add parents
+    // this allows resources to be expanded
+    for (let parent of node.parents) {
       nodes.push(data.tree[parent]);
     }
+    addByproducts(node);
+
     while (nodes.length > 0) {
-      let node = nodes.pop();
-      visited.add(node.id);
+      node = nodes.pop();
       if (!displayedNodes.value[node.id] && data.graph.nodes[node.id]) {
         displayedNodes.value[node.id] = { ...data.graph.nodes[node.id] };
       }
       if (node.isResource) {
         continue;
       }
+      addByproducts(node);
       for (let parent of data.tree[node.id].parents) {
-        if (!visited.has(parent)) {
+        if (!displayedNodes.value[parent]) {
           nodes.push(data.tree[parent]);
         }
       }

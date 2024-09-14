@@ -30,6 +30,7 @@ function make_tree(recipes, items, resources) {
       parents: [],
       children: [],
       isResource: false,
+      isRecipe: true,
     };
     for (let product of recipe.products) {
       if (!nodes[product.name]) {
@@ -39,6 +40,7 @@ function make_tree(recipes, items, resources) {
           parents: [],
           children: [],
           isResource: false,
+          isRecipe: false,
         };
       }
       nodes[product.name].parents.push(recipe.name);
@@ -52,6 +54,7 @@ function make_tree(recipes, items, resources) {
           parents: [],
           children: [],
           isResource: false,
+          isRecipe: false,
         };
       }
       nodes[ingredient.name].children.push(recipe.name);

@@ -11,7 +11,7 @@
               <p color="onSecondary" class="text-right">Version: {{ packageVersion }}</p>
             </v-col>
             <v-col cols="auto">
-              <a href="https://github.com/K20shores/Satisfactory-Recipe-Chains">
+              <a href="https://github.com/K20shores/Satisfactory-Recipe-Chains" target="_blank">
                 <v-icon color="onSecondary">mdi-github</v-icon>
               </a>
             </v-col>

@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="mx-0" style="max-width:100%">
     <v-row>
       <!-- Column for the search input -->
       <v-col cols="3">
